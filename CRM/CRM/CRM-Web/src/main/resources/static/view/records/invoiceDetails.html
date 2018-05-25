@@ -1,0 +1,313 @@
+<script>
+	jQuery(document).ready(function() {
+		ComponentsDateTimePickers.init()
+	});
+</script>
+<div class="container-fluid">
+	<div class="form-body" style="border-top: 1px solid #e5e5e5">
+		<!-- <row-1 start> -->
+		<div class=" col-md-12"
+			style="border: 1px solid #e5e5e5; margin-bottom: 5px; padding: 4px;">
+			<div class="col-md-6">
+				<div class="row">
+					<div class="col-xs-8">
+						<label class="control-label">Invoice Sent
+							Date :</label>
+						<div>
+							<div class="input-group date form_datetime bs-datetime"
+								data-date-format="yyyy-mm-dd hh:ii:ss">
+								<input class="form-control" size="16" type="text" value=""
+									readonly ng-model="recordDto.invoice.date"
+									name="invoiceDate" /> <span class="input-group-addon">
+									<button class="btn default date-reset" type="button">
+										<i class="fa fa-times"></i>
+									</button>
+								</span> <span class="input-group-addon">
+									<button class="btn default date-set" type="button">
+										<i class="fa fa-calendar"></i>
+									</button>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-8">
+						<label class="control-label">Payment
+							Received Date :</label>
+						<div>
+							<div class="input-group input-medium date date-picker"
+								data-date-format="dd-mm-yyyy" data-date-start-date="+0d"
+								style="width: 100% !important;">
+								<input type="text" class="form-control" readonly
+									ng-model="recordDto.invoice.payReceiveDateDummy"
+									name="payReceiveDate"> <span class="input-group-btn">
+									<button class="btn default" type="button">
+										<i class="fa fa-calendar"></i>
+									</button>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-xs-8" class="datahide">
+						<label class="control-label">Payment Received By :</label> <select
+							class="form-control" ng-model="recordDto.invoice.payReceiveBy"
+							ng-change="payment()">
+							<option value="{{pay}}" ng-repeat="pay in paymentReceivedByList" name = "payReceiveBy"
+								ng-selected="pay == recordDto.invoice.payReceiveBy">{{pay}}</option>
+
+						</select>
+					</div>
+					<div class="col-md-4" style="margin-top: 26px;">
+						<button class="btn default" type="button">Send Payment
+							Confirmation</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="row">
+					<div class="col-md-6">
+						<label class="control-label">Notes :</label>
+						<textarea rows="4" type="text" class="form-control common-border"
+							ng-model="recordDto.invoice.additionalNotes" name = "additionalNotes"></textarea>
+					</div>
+
+					<div class="col-md-6" style="margin-top: 6px;">
+						<label class="mt-checkbox mt-checkbox-outline"> <input
+							type="checkbox" ng-model="recordDto.invoice.invSentToSchFinance"
+							>Sent Invoice to
+							School Finance Department <span></span>
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--row2  -->
+		<div class=" col-md-12" id="bacs"
+			style="border: 1px solid #e5e5e5; margin-bottom: 5px; padding: 4px;">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label">BACS Ref No :</label> <input
+								type="text" class="form-control" name = "bACSRefNo"
+								ng-model="recordDto.invoice.bACSRefNo">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<label class="control-label">Paid by :</label><input type="text" name = "paidByBacs"
+							class="form-control" ng-model="recordDto.invoice.paidByBacs">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="col-md-6" style="margin-top: 8px;">
+						<label class="mt-checkbox mt-checkbox-outline"> <input
+							type="checkbox" ng-model="recordDto.invoice.lTBacs" name = "lTBacs"
+							> LT<span></span>
+						</label>
+					</div>
+					<div class=" col-md-6" style="margin-top: 8px;">
+						<label class="mt-checkbox mt-checkbox-outline"> <input
+							type="checkbox" ng-model="recordDto.invoice.reconsWithBank" name = "reconsWithBank"
+							>Reconciled With The
+							Bank<span></span>
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- row 3  -->
+
+
+
+		<div class="col-md-12" id="cheque"
+			style="border: 1px solid #e5e5e5; margin-bottom: 5px; padding: 4px;">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label">Cheque No. :</label> <input
+								type="text" class="form-control"
+								ng-model="recordDto.invoice.checkNo" name = "checkNo">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label">Paid by :</label> <input type="text"
+								class="form-control" ng-model="recordDto.invoice.paidByCheque" name = "paidByCheque">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="col-xs-10">
+						<label class="control-label">Cheque
+							Date :</label>
+						<div>
+							<div class="input-group input-medium date date-picker"
+								data-date-format="dd-mm-yyyy" data-date-start-date="+0d"
+								style="width: 100% !important;">
+								<input type="text" class="form-control" readonly
+									ng-model="recordDto.invoice.chequeDateDummy"
+									name="chequeDate" /> <span class="input-group-btn">
+									<button class="btn default" type="button">
+										<i class="fa fa-calendar"></i>
+									</button>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+
+				<div class="col-md-6">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label">Sort Code :</label> <input
+								type="text" class="form-control" name = "sortCode"
+								ng-model="recordDto.invoice.sortCode">
+						</div>
+					</div>
+					<div class="col-md-6" style="margin-top: 26px;">
+						<div class="form-group">
+							<label class="mt-checkbox mt-checkbox-outline"> <input
+								type="checkbox" ng-model="recordDto.invoice.lTCheque" name = "lTCheque"
+								>LT<span></span>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="col-xs-10">
+						<label class="control-label">Cheque
+							Deposite Date:</label>
+						<div>
+							<div class="input-group input-medium date date-picker"
+								data-date-format="dd-mm-yyyy" data-date-start-date="+0d"
+								style="width: 100% !important;">
+								<input type="text" class="form-control" readonly
+									ng-model="recordDto.invoice.checqueDepDateDummy"
+									name="chequeDepDate" /> <span class="input-group-btn">
+									<button class="btn default" type="button">
+										<i class="fa fa-calendar"></i>
+									</button>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label">Account No. :</label> <input
+								type="text" class="form-control" name = "accNo"
+								ng-model="recordDto.invoice.accNo">
+						</div>
+					</div>
+					<div class="col-md-6"></div>
+				</div>
+				<div class="col-md-6">
+					<div class="col-xs-10">
+						<label class="control-label">Bank
+							Received The Cheque :</label>
+						<div>
+							<div class="input-group input-medium date date-picker"
+								data-date-format="dd-mm-yyyy" data-date-start-date="+0d"
+								style="width: 100% !important;">
+								<input type="text" class="form-control" readonly
+									ng-model="recordDto.invoice.bankReceiveDateDummy"
+									name="BankReceiveDate" /> <span class="input-group-btn">
+									<button class="btn default" type="button">
+										<i class="fa fa-calendar"></i>
+									</button>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- row 4  -->
+		<div class="col-md-12" id="paypal"
+			style="border: 1px solid #e5e5e5; margin-bottom: 5px; padding: 4px;">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="mt-checkbox mt-checkbox-outline"> <input
+								type="checkbox" ng-model=" recordDto.invoice.raisedInvInPayPal" name = "raisedInvInPayPal"
+								>Raised Invoice In
+								Paypal <span></span>
+							</label>
+						</div>
+					</div>
+					<div class="col-md-6"></div>
+				</div>
+				<div class="col-md-6">
+					<div class="col-xs-10">
+						<label class="control-label">Date Of
+							Payment Transfered To The Bank :</label>
+						<div>
+							<div class="input-group input-medium date date-picker"
+								data-date-format="dd-mm-yyyy" data-date-start-date="+0d"
+								style="width: 100% !important;">
+								<input type="text" class="form-control" readonly
+									ng-model="recordDto.invoice.dateOfTransfToBankDummy"
+									name="DateOfPaymentTansfer" /> <span class="input-group-btn">
+									<button class="btn default" type="button">
+										<i class="fa fa-calendar"></i>
+									</button>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class=" col-md-12" id="google"
+			ng-disabled="!recordDto.invoice.payReceiveBy"
+			style="border: 1px solid #e5e5e5; margin-bottom: 5px; padding: 8px;">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label">Flight Cost :</label> <input
+								type="number" class="form-control" placeholder="0" name = "flCost"
+								ng-model=" recordDto.invoice.flCost">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label">Train/Driving Cost :</label> <input
+								type="number" class="form-control" placeholder="0" name = "trainGoCost"
+								ng-model="recordDto.invoice.trainGoCost">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label">Taxi Cost :</label> <input
+								type="number" class="form-control" placeholder="0" name = "taxiCost"
+								ng-model="recordDto.invoice.taxiCost">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label">Hotel Cost :</label> <input
+								type="number" class="form-control" placeholder="0" name = "hotelCost"
+								ng-model="recordDto.invoice.hotelCost">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

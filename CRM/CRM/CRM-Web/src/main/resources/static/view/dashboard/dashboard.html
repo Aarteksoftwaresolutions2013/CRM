@@ -1,0 +1,720 @@
+<div class="page-header-fixed page-sidebar-closed-hide-logo ">
+	<!-- BEGIN CONTAINER -->
+
+	<div class="wrapper">
+
+		<!-- END HEADER -->
+		<div class="container-fluid">
+			<div class="page-content">
+				<!-- BEGIN BREADCRUMBS -->
+				<div class="breadcrumbs">
+					<h1>Admin Dashboard</h1>
+					<ol class="breadcrumb">
+						<li><a href="#">Home</a></li>
+						<li class="active">Dashboard</li>
+					</ol>
+				</div>
+				<!-- END BREADCRUMBS -->
+				<!-- Table start  -->
+
+				<div class="row">
+					<div class="col-md-2">
+						<div class="row" style="border: 1px solid #e5e5e5; padding: 8px;">
+							<div class="form-group col-md-12">
+								<label class="control-label">Training Location :</label> <select
+									class="form-control"
+									ng-model="dashboardFilterDto.trainingLocation"
+									ng-change="getBookingByFiltersFromTrLocationSection()">
+									<option selected="">Show All</option>
+									<option value="{{trLocation.trLId}}"
+										ng-repeat="trLocation in trainingLocationList">{{trLocation.trLocation}}</option>
+								</select>
+							</div>
+
+							<div class="form-group col-md-12">
+								<label class="control-label">Dates :</label> <select
+									class="form-control" ng-model="dashboardFilterDto.dates"
+									ng-change="getBookingByFiltersFromTrLocationSection()">
+									<option selected="">Show All</option>
+									<option value="{{date.trDate}}" ng-repeat="date in dateList">{{date.trDate
+										| date : 'dd-MM-yyyy'}}</option>
+								</select>
+							</div>
+
+							<div class="form-group col-md-12">
+								<label class="control-label">Booking Enquiry :</label> <select
+									class="form-control"
+									ng-model="dashboardFilterDto.trainingBookingEnquiry"
+									ng-change="getBookingByFiltersFromTrLocationSection()">
+									<option value="{{status}}" ng-repeat="status in statusList">{{status}}</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="row" style="border: 1px solid #e5e5e5; padding: 8px;">
+							<div class="form-group col-md-12">
+								<label class="control-label">Course :</label> <select
+									class="form-control" ng-model="dashboardFilterDto.course"
+									ng-change="getBookingByFiltersFromCourseSection()">
+									<option selected="">All courses</option>
+									<option value="{{training.tId}}"
+										ng-repeat="training in trainingList">{{training.tName}}</option>
+								</select>
+							</div>
+
+							<div class="form-group col-md-12">
+								<label class="control-label">Booking/Enquiry :</label> <select
+									class="form-control"
+									ng-model="dashboardFilterDto.courseBookingEnquiry"
+									ng-change="getBookingByFiltersFromCourseSection()">
+									<option value="{{status}}" ng-repeat="status in statusList">{{status}}</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="row" style="border: 1px solid #e5e5e5; padding: 8px;">
+							<div class="form-group col-md-12">
+								<label class="control-label">Software :</label> <select
+									class="form-control" ng-model="dashboardFilterDto.software"
+									ng-change="getBookingByFiltersFromSoftwareSection()">
+									<option value="{{key}}"
+										ng-repeat="(key, software) in softwareList">{{software}}</option>
+								</select>
+							</div>
+
+							<div class="form-group col-md-12">
+								<label class="control-label">Booking/Enquiry :</label> <select
+									class="form-control"
+									ng-model="dashboardFilterDto.softwareBookingEnquiry"
+									ng-change="getBookingByFiltersFromSoftwareSection()">
+									<option value="{{status}}" ng-repeat="status in statusList">{{status}}</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="row" style="border: 1px solid #e5e5e5; padding: 8px;">
+
+							<div class="form-group col-md-12">
+								<label class="control-label">Not confirmed (Locations) :</label>
+								<select class="form-control"
+									ng-model="dashboardFilterDto.notConfirmedLocations"
+									ng-change="getBookingByFiltersFromConfirmedSection()">
+									<option value="Show All" selected="">Show All</option>
+									<option
+										ng-repeat="(key , notConfirmedLoc) in notConfirmedLocationList track by $index"
+										value="{{key}}">{{notConfirmedLoc}}</option>
+								</select>
+							</div>
+
+							<div class="form-group col-md-12">
+								<label class="control-label">Not confirmed (In-House) :</label>
+								<select class="form-control"
+									ng-model="dashboardFilterDto.notConfirmedInHouse"
+									ng-change="getBookingByFiltersFromConfirmedSectionInHouse()">
+									<option value="Show All" selected="">Show All</option>
+									<option
+										ng-repeat="(key, notConfirmInHouse) in notConfirmedInHouseList track by $index"
+										value="{{key}}">{{notConfirmInHouse}}</option>
+								</select>
+							</div>
+
+						</div>
+					</div>
+					<div class="col-md-8 ">
+						<div class="portlet box">
+							<div class="portlet-title">
+								<form class="form-inline" style="text-align: right">
+									<div class="form-group">
+										<label>Search</label> <input type="text" ng-model="search"
+											class="form-control" placeholder="Search">
+									</div>
+								</form>
+							</div>
+							<div class="portlet-body">
+								<div class="table-scrollable">
+									<table class="table table-striped table-bordered table-hover">
+										<thead>
+											<tr>
+												<th scope="col" ng-click="sort('calledDate')">Called<span
+													class="glyphicon sort-icon" ng-show="sortKey=='calledDate'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('calledUser')">Caller <span
+													class="glyphicon sort-icon" ng-show="sortKey=='calledUser'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span>
+												</th>
+												<th scope="col" ng-click="sort('callerNotes')">Caller
+													Notes <span class="glyphicon sort-icon"
+													ng-show="sortKey=='callerNotes'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span>
+												</th>
+												<th scope="col" ng-click="sort('title')">Title <span
+													class="glyphicon sort-icon" ng-show="sortKey=='title'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('fName')">Full Name <span
+													class="glyphicon sort-icon" ng-show="sortKey=='fName'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('scName')">School Name <span
+													class="glyphicon sort-icon" ng-show="sortKey=='scName'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('bookingPhase')">Phase <span
+													class="glyphicon sort-icon"
+													ng-show="sortKey=='bookingPhase'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span>
+												</th>
+												<th scope="col" ng-click="sort('trainingName')">Training
+													<span class="glyphicon sort-icon"
+													ng-show="sortKey=='trainingName'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span>
+												</th>
+												<th scope="col" ng-click="sort('trDate')">Training Date
+													<span class="glyphicon sort-icon"
+													ng-show="sortKey=='trDate'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span>
+												</th>
+												<th scope="col" ng-click="sort('submitDateTime')">Submit
+													Date Time <span class="glyphicon sort-icon"
+													ng-show="sortKey=='submitDateTime'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span>
+												</th>
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												<th scope="col" ng-click="sort('trainingLocation')">Training
+													Location <span class="glyphicon sort-icon"
+													ng-show="sortKey=='trainingLocation'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span>
+												</th>
+												<th scope="col" ng-click="sort('status')">Status <span
+													class="glyphicon sort-icon" ng-show="sortKey=='status'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('delegNum')">Number Of
+													Delegates <span class="glyphicon sort-icon"
+													ng-show="sortKey=='delegNum'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span>
+												</th>
+												<th scope="col" ng-click="sort('tel')">Telephone <span
+													class="glyphicon sort-icon" ng-show="sortKey=='tel'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('email')">Email <span
+													class="glyphicon sort-icon" ng-show="sortKey=='email'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('notes')">Message <span
+													class="glyphicon sort-icon" ng-show="sortKey=='notes'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('secondDeleg')"> Second Delegate<span
+													class="glyphicon sort-icon" ng-show="sortKey=='secondDeleg'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('thirdDeleg')"> Third Delegate<span
+													class="glyphicon sort-icon" ng-show="sortKey=='thirdDeleg'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('fourthDeleg')"> Fourth Delegate <span
+													class="glyphicon sort-icon" ng-show="sortKey=='fourthDeleg'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('invEmail')"> Invoiceing Email <span
+													class="glyphicon sort-icon" ng-show="sortKey=='invEmail'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+													
+													
+													
+													
+													
+													
+													
+													
+													
+													
+												<th scope="col" ng-click="sort('secondDelegEmail')"> 2ndDelegEmail<span
+													class="glyphicon sort-icon" ng-show="sortKey=='secondDelegEmail'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('thirdDelegEmail')"> 3rdDelegEmail<span
+													class="glyphicon sort-icon" ng-show="sortKey=='thirdDelegEmail'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('fourthDelegEmail')"> 4thDelegEmail<span
+													class="glyphicon sort-icon" ng-show="sortKey=='fourthDelegEmail'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('callBackTime')"> CallBack Time<span
+													class="glyphicon sort-icon" ng-show="sortKey=='callBackTime'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('startTime')"> Start Time<span
+													class="glyphicon sort-icon" ng-show="sortKey=='startTime'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('endTime')"> End Time<span
+													class="glyphicon sort-icon" ng-show="sortKey=='endTime'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('flCost')"> Fl Cost<span
+													class="glyphicon sort-icon" ng-show="sortKey=='flCost'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('trainGoCost')"> Train Go Cost<span
+													class="glyphicon sort-icon" ng-show="sortKey=='trainGoCost'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('taxiCost')"> Taxi Cost<span
+													class="glyphicon sort-icon" ng-show="sortKey=='taxiCost'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('hotelCost')"> Hotel Cost<span
+													class="glyphicon sort-icon" ng-show="sortKey=='hotelCost'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+													
+													
+													
+													
+													
+													
+													
+												<th scope="col" ng-click="sort('consultant')"> Consultant<span
+													class="glyphicon sort-icon" ng-show="sortKey=='consultant'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('vatAmount')"> VatAmount<span
+													class="glyphicon sort-icon" ng-show="sortKey=='vatAmount'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('chkvat')"> chkvat<span
+													class="glyphicon sort-icon" ng-show="sortKey=='chkvat'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('lt')"> LT<span
+													class="glyphicon sort-icon" ng-show="sortKey=='lt'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('additionalDelegates')"> Additional Delegates<span
+													class="glyphicon sort-icon" ng-show="sortKey=='additionalDelegates'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('id')"> Invoice ID<span
+													class="glyphicon sort-icon" ng-show="sortKey=='id'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('firstDelegFee')"> 1stDelegFee<span
+													class="glyphicon sort-icon" ng-show="sortKey=='firstDelegFee'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('secondDelegFee')"> 2ndDelegFee<span
+													class="glyphicon sort-icon" ng-show="sortKey=='secondDelegFee'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('thirdDelegFee')"> 3rdDelegfee<span
+													class="glyphicon sort-icon" ng-show="sortKey=='thirdDelegFee'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('discount')"> Discount<span
+													class="glyphicon sort-icon" ng-show="sortKey=='discount'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+													
+													
+													
+													
+													
+													
+												<th scope="col" ng-click="sort('cancsurCharge')"> cancsurcharge<span
+													class="glyphicon sort-icon" ng-show="sortKey=='cancsurCharge'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('schAddr')"> SchAddr<span
+													class="glyphicon sort-icon" ng-show="sortKey=='schAddr'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('website')"> Website<span
+													class="glyphicon sort-icon" ng-show="sortKey=='website'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('total')"> Total<span
+													class="glyphicon sort-icon" ng-show="sortKey=='total'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('fourthDelegFee')"> 4thDelegFee<span
+													class="glyphicon sort-icon" ng-show="sortKey=='fourthDelegFee'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('venue')"> Venue<span
+													class="glyphicon sort-icon" ng-show="sortKey=='venue'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('date')"> Date<span
+													class="glyphicon sort-icon" ng-show="sortKey=='date'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('poNo')"> PoNo<span
+													class="glyphicon sort-icon" ng-show="sortKey=='poNo'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('trainCost')"> Train Cost<span
+													class="glyphicon sort-icon" ng-show="sortKey=='trainCost'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('travelCost')"> Travel Cost<span
+													class="glyphicon sort-icon" ng-show="sortKey=='travelCost'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+													
+													
+													
+													
+													
+													
+												<th scope="col" ng-click="sort('softCost')"> Soft Cost<span
+													class="glyphicon sort-icon" ng-show="sortKey=='softCost'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('invSentDate')"> InvSentDate<span
+													class="glyphicon sort-icon" ng-show="sortKey=='invSentDate'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('payReceiveDate')"> PayRecieveDate<span
+													class="glyphicon sort-icon" ng-show="sortKey=='payReceiveDate'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('payReceiveBy')"> PayRecieveBy<span
+													class="glyphicon sort-icon" ng-show="sortKey=='payReceiveBy'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('additionalNotes')"> Additional Notes<span
+													class="glyphicon sort-icon" ng-show="sortKey=='additionalNotes'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('invSentToSchFinance')"> InvSentToSchFinance<span
+													class="glyphicon sort-icon" ng-show="sortKey=='invSentToSchFinance'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('bACSRefNo')"> BACSRefNo<span
+													class="glyphicon sort-icon" ng-show="sortKey=='bACSRefNo'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('reconsWithBank')"> ReconsWithBank<span
+													class="glyphicon sort-icon" ng-show="sortKey=='reconsWithBank'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('paidByBacs')"> PaidByBacs<span
+													class="glyphicon sort-icon" ng-show="sortKey=='paidByBacs'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('lTBacs')"> LTBacs<span
+													class="glyphicon sort-icon" ng-show="sortKey=='lTBacs'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+													
+													
+													
+													
+													
+													
+												<th scope="col" ng-click="sort('checkNo')"> CheckNo<span
+													class="glyphicon sort-icon" ng-show="sortKey=='checkNo'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('accNo')"> AccNo<span
+													class="glyphicon sort-icon" ng-show="sortKey=='accNo'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('sortCode')"> Sort Code<span
+													class="glyphicon sort-icon" ng-show="sortKey=='sortCode'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('paidByCheque')"> PaidByCheque<span
+													class="glyphicon sort-icon" ng-show="sortKey=='paidByCheque'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('lTCheque')"> LTCheque<span
+													class="glyphicon sort-icon" ng-show="sortKey=='lTCheque'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('chequeDate')"> ChequeDate<span
+													class="glyphicon sort-icon" ng-show="sortKey=='chequeDate'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('checqueDepDate')"> ChequeDepDate<span
+													class="glyphicon sort-icon" ng-show="sortKey=='checqueDepDate'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('bankReceiveDate')"> BankRecieveDate<span
+													class="glyphicon sort-icon" ng-show="sortKey=='bankReceiveDate'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('raisedInvInPayPal')"> RaisedInvInPayPal<span
+													class="glyphicon sort-icon" ng-show="sortKey=='raisedInvInPayPal'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('dateOfTransfToBank')"> DateOfTransfToBank<span
+													class="glyphicon sort-icon" ng-show="sortKey=='dateOfTransfToBank'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+													
+													
+													
+													
+													
+													
+												<th scope="col" ng-click="sort('paymentType')"> Payment Type<span
+													class="glyphicon sort-icon" ng-show="sortKey=='paymentType'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('hear')"> Hear<span
+													class="glyphicon sort-icon" ng-show="sortKey=='hear'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('hearOther')"> Hear Other<span
+													class="glyphicon sort-icon" ng-show="sortKey=='hearOther'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('typeOfCall')"> Type Of Call<span
+													class="glyphicon sort-icon" ng-show="sortKey=='typeOfCall'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('sName')"> Sales Person<span
+													class="glyphicon sort-icon" ng-show="sortKey=='sName'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+												<th scope="col" ng-click="sort('demoDate')"> Demo Date<span
+													class="glyphicon sort-icon" ng-show="sortKey=='demoDate'"
+													ng-class="{'glyphicon-menu-up':reverse,'glyphicon-menu-down':!reverse}"></span></th>
+
+
+											</tr>
+										</thead>
+										<tbody>
+											<tr
+												dir-paginate="book in bookingList |orderBy:sortKey:reverse| itemsPerPage: itemsPerPage | filter:search"
+												ng-click="editRecord(book.booking.bId, $index)"
+												total-items="total_count" current-page="pagination.current">
+												<td>{{book.booking.calledDate}}</td>
+												<td>{{book.booking.calledUser}}</td>
+												<td>{{book.booking.callerNotes}}</td>
+												<td>{{book.booking.title}}</td>
+												<td>{{book.booking.fName}}</td>
+												<td>{{book.booking.scName}}</td>
+												<td>{{book.booking.bookingPhase}}</td>
+												<td>{{book.booking.trainingName}}</td>
+												<td>{{book.booking.trDateDummy}}</td>
+												<td>{{book.booking.submitDateTime}}</td>
+												
+												
+												
+												
+												
+												
+												
+												<td>{{book.booking.trainingLocation}}</td>
+												<td>{{book.booking.status}}</td>
+												<td>{{book.booking.delegNum}}</td>
+												<td>{{book.booking.tel}}</td>
+												<td>{{book.booking.email}}</td>
+												<td>{{book.booking.notes}}</td>
+												<td>{{book.booking.secondDeleg}}</td>
+												<td>{{book.booking.thirdDeleg}}</td>
+												<td>{{book.booking.fourthDeleg}}</td>
+												<td>{{book.booking.invEmail}}</td>
+												
+												
+												
+												
+												
+												<td>{{book.booking.secondDelegEmail}}</td>
+												<td>{{book.booking.thirdDelegEmail}}</td>
+												<td>{{book.booking.fourthDelegEmail}}</td>
+												<td>{{book.booking.callBackTime}}</td>
+												<td>{{book.booking.startTime}}</td>
+												<td>{{book.booking.endTime}}</td>
+												<td>{{book.booking.flCost}}</td>
+												<td>{{book.booking.trainGoCost}}</td>
+												<!-- <td>{{book.invoice.trainGoCost}}</td> -->
+												<td>{{book.booking.taxiCost}}</td>
+												<td>{{book.booking.hotelCost}}</td>
+												
+												
+												
+												
+												
+												
+												
+												<td>{{book.booking.consultant}}</td>
+												<td>{{book.invoice.vatAmount}}</td>
+												<td>{{book.invoice.chkvat}}</td>
+												<td>{{book.invoice.lt}}</td>
+												<td>{{book.invoice.additionalDelegates}}</td>
+												<td>{{book.invoice.id}}</td>
+												<td>{{book.invoice.firstDelegFee}}</td>
+												<td>{{book.invoice.secondDelegFee}}</td>
+												<td>{{book.invoice.thirdDelegFee}}</td>
+												<td>{{book.invoice.discount}}</td>
+												
+												
+												
+												
+												
+												<td>{{book.invoice.cancsurCharge}}</td>
+												<td>{{book.invoice.schAddr}}</td>
+												<td>{{book.invoice.website}}</td>
+												<td>{{book.invoice.total}}</td>
+												<td>{{book.invoice.fourthDelegFee}}</td>
+												<td>{{book.invoice.venue}}</td>
+												<td>{{book.invoice.date}}</td>
+												<td>{{book.invoice.poNo}}</td>
+												<td>{{book.invoice.trainCost}}</td>
+												<td>{{book.invoice.travelCost}}</td>
+												
+												
+												
+												
+												<td>{{book.invoice.softCost}}</td>
+												<td>{{book.invoice.invSentDate}}</td>
+												<td>{{book.invoice.payReceiveDateDummy}}</td>
+												<td>{{book.invoice.payReceiveBy}}</td>
+												<td>{{book.invoice.additionalNotes}}</td>
+												<td>{{book.invoice.invSentToSchFinance}}</td>
+												<td>{{book.invoice.bACSRefNo}}</td>
+												<td>{{book.invoice.reconsWithBank}}</td>
+												<td>{{book.invoice.paidByBacs}}</td>
+											    <td>{{book.invoice.lTBacs}}</td>
+											    
+											    
+											    
+											    
+											    
+												<td>{{book.invoice.checkNo}}</td>
+												<td>{{book.invoice.accNo}}</td>
+												<td>{{book.invoice.sortCode}}</td>
+												<td>{{book.invoice.paidByCheque}}</td>
+												<td>{{book.invoice.lTCheque}}</td>
+												<td>{{book.invoice.chequeDateDummy}}</td>
+												<td>{{book.invoice.checqueDepDateDummy}}</td>
+												<td>{{book.invoice.bankReceiveDateDummy}}</td>
+												<td>{{book.invoice.raisedInvInPayPal}}</td>
+												<td>{{book.invoice.dateOfTransfToBankDummy}}</td>
+												<td>{{book.invoice.paymentType}}</td>
+												
+												
+												<td>{{book.booking.hear}}</td>
+												<td>{{book.booking.hearOther}}</td>
+												<td>{{book.booking.typeOfCall}}</td>
+												<td>{{book.invoice.sName}}</td>
+												<td>{{book.booking.demoDate}}</td>
+												
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="col-md-12 form-group">
+									<div class="common-text-align-left">
+										<div class="dataTables_info" id="sample_1_info" role="status"
+											aria-live="polite">Showing {{itemsfrom}} to
+											{{itemsPerPageForView}} of {{total_count}} records</div>
+									</div>
+									<div class="common-text-align-right">
+										<dir-pagination-controls max-size="5" direction-links="true"
+											boundary-links="true"
+											on-page-change="pageChanged(newPageNumber)">
+										</dir-pagination-controls>
+									</div>
+								</div>
+							</div>
+
+							<!-- END SAMPLE TABLE PORTLET-->
+						</div>
+					</div>
+					<div class="col-md-2">
+
+						<div class="row">
+							<div class="form-group col-md-12"
+								style="border: 1px solid #e5e5e5; padding: 8px;">
+								<label class="control-label">Payed By :</label> <select
+									class="form-control" ng-model="dashboardFilterDto.payedBy"
+									ng-change="getBookingByFiltersFromPayedBySection()">
+									<option value="{{payed}}" ng-repeat="payed in paymentBy">{{payed}}</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12"
+								style="border: 1px solid #e5e5e5; padding: 8px;">
+								<div class="form-group">
+									<label class="control-label">Invoice Number :</label> <input
+										type="text" class="form-control" placeholder=""
+										ng-model="dashboardFilterDto.invoiceNumberDummy">
+								</div>
+								<div class="form-actions right">
+									<button class="btn default" type="button"
+										ng-click="defaultValuesInvoiceNumber()">Get</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12"
+								style="border: 1px solid #e5e5e5; padding: 8px;">
+								<div class="form-group">
+									<label class="control-label">Email :</label> <input type="text"
+										class="form-control" placeholder=""
+										ng-model="dashboardFilterDto.email">
+
+								</div>
+								<div class="form-actions right">
+									<button class="btn default" type="button"
+										ng-click="searchDefaultValues()">Search by Email</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12"
+								style="border: 1px solid #e5e5e5; padding: 8px;">
+								<div class="form-group">
+									<label class="control-label">Telephone :</label> <input
+										type="text" class="form-control" placeholder=""
+										ng-model="dashboardFilterDto.telephone">
+
+								</div>
+								<div class="form-actions right">
+									<button class="btn default" type="button"
+										ng-click="defaultValuesTelephone()">Search by
+										Telephone</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12"
+								style="border: 1px solid #e5e5e5; padding: 8px;">
+								<div class="form-group">
+									<label class="control-label">Full Name :</label> <input
+										type="text" class="form-control" placeholder=""
+										ng-model="dashboardFilterDto.fullName">
+								</div>
+								<div class="form-actions right">
+									<button class="btn default" type="button"
+										ng-click="defaultValuesFullNames()">Search by Full
+										Name</button>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-12"
+								style="border: 1px solid #e5e5e5; padding: 8px;">
+								<div class="form-group">
+									<label class="control-label">School Name :</label> <input
+										type="text" class="form-control" placeholder=""
+										ng-model="dashboardFilterDto.schoolNames">
+								</div>
+								<div class="form-actions right">
+									<button class="btn default" type="button" ng-click = "getBookingByFiltersFromSchoolName()">Search by
+										School Name</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-10 button-space-top-left">
+							<div class="row button-space">
+								<div class="col-md-12">
+									<div class="form-group">
+										<button class="btn default" type="button">Booking
+											Excel Table</button>
+									</div>
+								</div>
+							</div>
+
+							<div class="row button-space">
+								<div class="col-md-12 form-group">
+									<button class="btn default " type="button"
+										ng-click="viewReporting()">Reporting</button>
+								</div>
+							</div>
+
+							<div class="row button-space">
+								<div class="col-md-12">
+									<div class="form-group">
+										<button class="btn default" type="button">Resend
+											emails</button>
+									</div>
+								</div>
+							</div>
+
+							<div class="row button-space">
+								<div class="col-md-12">
+									<div class="form-group">
+										<button class="btn default" type="button">Email
+											Confirmation</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Table End -->
+
+			</div>
+			<!-- BEGIN FOOTER -->
+			<p class="copyright">Copyright &copy; Lifetime Learning 2017</p>
+			<a href="#index" class="go2top"> <i class="icon-arrow-up"></i>
+			</a>
+			<!-- END FOOTER -->
+		</div>
+	</div>
+	<!-- END CONTAINER -->
+	<div class="quick-nav-overlay"></div>
+</div>

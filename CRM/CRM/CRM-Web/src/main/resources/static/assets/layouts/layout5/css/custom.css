@@ -1,0 +1,313 @@
+/* here you can put your own css to customize and override the theme */
+/*invoice details  */
+.content {
+	background-color: #fdfdfd !important;
+}
+
+.btn-No-Color-color {
+	background-color: white !important;
+}
+
+.btn-Patricia-Holiday-color {
+	background-color: Orange !important;
+}
+
+.btn-Half-Term-color {
+	background-color: LightSkyBlue !important;
+}
+
+.btn-Possible-Training-color {
+	background-color: YellowGreen !important;
+}
+
+.btn-Bank-Holidays-color {
+	background-color: LemonChiffon !important;
+}
+
+.btn-Greeen-Holiday-color {
+	background-color: Plum !important;
+}
+.color{
+	margin-left: -42px;
+}
+.modal {
+    top: 150px;
+}
+/* css for data and date alignment center */
+  #calendar tr, #calendar td, #calendar tr td span  
+{   
+	text-align: center !important;   
+    
+ } 
+.portlet.calendar .fc-event .fc-title{
+	float: none !important;
+}
+.form-border {
+	border: 1px solid #e5e5e5;
+	padding: 5px;
+}
+
+.my-disable {
+	pointer-events: none;
+	opacity: 0.5;
+}
+table.dataTable thead .sorting_asc, .sorting_desc {
+    background : none;
+}
+
+div .frontPageBanner img {
+	height: 530.518px !important;
+	width: 0 px !important;
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	width: 100% !important;
+	max-height: none;
+	max-width: none;
+	z-index: -999999;
+	left: 20px !important;
+	top: -83.8207px;
+}
+
+.box-border {
+	border: 4px solid #e5e5e5 !important;
+	border-top: 28px solid #e5e5e5 !important;
+}
+
+.btn-space {
+	padding: 0px;
+}
+
+.btn-date {
+	margin-left: 22px;
+}
+
+.defaultNone {
+	display: none;
+}
+
+.defaultBlock {
+	display: block !important;
+}
+/*  asset*/
+.input-space {
+	margin-left: -29px !important;
+	margin-top: 7px;
+}
+
+.button-space {
+	margin-bottom: 4px;
+}
+
+.button-space-top-left {
+	margin-top: 7PX;
+	margin-left: -22px;
+}
+
+#loader {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	display: none;
+	background-image:
+		url('https://media.giphy.com/media/LG6iQwU99l9Bu/giphy.gif');
+	float: left;
+	top: 0;
+	left: 0;
+	z-index: 1111;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: #b1b1b1;
+	opacity: .5;
+}
+
+.error {
+	color: red;
+}
+
+.datahide {
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+.cursorPointer {
+	cursor: pointer;
+}
+
+.ulPositoin {
+	float: left;
+}
+
+.common-text-align-right {
+	float: right !important;
+}
+
+.common-text-align-left {
+	float: left;
+	margin-top: 16px;
+}
+
+@media screen and (max-width: 1600px) and (min-width: 900px) {
+	div .frontPageBanner img {
+		height: 448.518px !important;
+		width: 0 px !important;
+		margin: 0px;
+		padding: 0px;
+		border: none;
+		width: 803px !important;
+		max-height: none;
+		max-width: none;
+		z-index: -999999;
+		top: -83.8207px;
+	}
+}
+
+@media screen and (max-width: 2500px) and (min-width: 1366px) {
+	.frontPageBanner {
+		min-height: 97vh;
+		height: 530.518px !important;
+	}
+}
+
+@media screen and (max-width: 1366px) and (min-width: 1024px) {
+	div .frontPageBanner img {
+		width: 100% !important;
+		height: 496px !important;
+	}
+	.frontPageBanner {
+		min-height: 97vh;
+		height: 530.518px !important;
+	}
+}
+
+@media screen and (max-width: 1366px) and (min-width: 1024px) {
+	.frontPageBanner {
+		min-height: 97vh;
+		height: 530.518px !important;
+	}
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+	div .frontPageBanner img {
+		width: 100% !important;
+		height: 100px !important;
+		margin-top: 146 !important;
+	}
+	div .frontPageBanner img {
+		height: 397.518px !important;
+		width: 0 px !important;
+		margin: 0px;
+		padding: 0px;
+		border: none;
+		width: 952px;
+		max-height: none;
+		max-width: none;
+		z-index: -999999;
+		top: -83.8207px;
+	}
+	.frontPageBanner {
+		min-height: 7vh !important;
+		height: 530.518px !important;
+	}
+}
+
+@media screen and (max-width: 721px) and (min-width: 0px) {
+	.frontPageBanner {
+		min-height: 7vh !important;
+		height: 530.518px !important;
+	}
+}
+
+.icon-bar-white {
+	color: #fdfdfd;
+}
+
+table.dataTable.no-footer {
+	border-bottom: 1px solid #ddd;
+}
+
+.tablealigment {
+	margin-top: 2%;
+	padding: 20px;
+}
+
+.dialByImg {
+	max-height: 25px;
+	margin-top: 26px;
+	cursor: pointer;
+}
+
+.common-bottomspace {
+	margin-bottom: 23px;
+}
+
+.common-border {
+	border-left: 3px solid #e5e5e5 !important;
+	border-top: 3px solid #e5e5e5 !important;
+}
+
+.nav-tabs>li>a.records {
+	background-color: #e5e5e5;
+	padding: 10px 10px;
+}
+
+.nav-tabs>li.active>a {
+	background-color: #fff !important;
+}
+
+.btn-footer {
+	padding: 6px 13px;
+}
+
+.combo-sapce {
+	margin-top: 19px;
+}
+
+@media ( max-width : 992px) {
+	.btn-space {
+		padding: 15px;
+		margin-left: -28px;
+	}
+	.button-size {
+		margin-top: 1px;
+		margin-left: -354px;
+	}
+	.nav-tabs>li>a.records {
+		font-size: 8px;
+	}
+	.btn-responsive {
+		font-size: 8px;
+	}
+	.btn-responsiveCalendar {
+		font-size: 7px;
+	}
+	.btn-fontCalendar {
+		font-size: 5px;
+	}
+}
+
+.reportingpage-button-space {
+	width: initial;
+	padding-right: initial;
+}
+
+.form-Submit-button-left {
+	padding: 20px;
+	margin: 0;
+}
+
+.form-Submit-button-center {
+	padding: 20px;
+	margin: 0;
+	text-align: center;
+	margin-top: -45px;
+}
+
+.btn-custom {
+	margin-top: -25px;
+}
+
+.form .form-actionsNew, .portlet-form .form-actionsNew {
+	padding: 20px;
+	margin-left: 37px;
+}

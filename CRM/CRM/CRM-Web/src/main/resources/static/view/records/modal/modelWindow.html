@@ -1,0 +1,20 @@
+<div>
+	<div class="modal-header">
+		<button type="button"  ng-click="$close()" class="close" data-dismiss="modal"
+			aria-hidden="true">&times;</button>
+		<h4 class="modal-title">Select Account</h4>
+	</div>
+	<div class="modal-body">
+		<p>Please select account for invoice payment</p>
+		<input class="messageCheckbox" type="checkbox" name="HSBC" value="HSBC"> HSBC<br>
+		<input class="messageCheckbox" type="checkbox" name="Santander" value="Santander">
+		Santander<br>
+	</div>
+	<div class="modal-footer">
+		<button type="button" ng-click="$close()" data-dismiss="modal"
+			class="btn dark btn-outline ">Cancel</button>
+		<button type="button" ng-click="ok($close())" data-dismiss="modal"
+			class="btn green ">Ok</button>
+	</div>
+</div>
+

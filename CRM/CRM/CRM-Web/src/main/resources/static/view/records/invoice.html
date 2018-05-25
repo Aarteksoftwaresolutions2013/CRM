@@ -1,0 +1,225 @@
+<div class="container-fluid">
+	<div class="
+	form-body" style="border-top: 1px solid #e5e5e5">
+		<div class=" col-md-6"
+			style="border: 1px solid #e5e5e5; padding: 8px;">
+			<div class="col-md-12">
+				<div class="form-group">
+					<label class="control-label">Venue :</label> <input type="text"
+						class="form-control" placeholder="Venue" name="Venue"
+						ng-model="recordDto.invoice.venue">
+				</div>
+
+			</div>
+			<div class="col-md-12" id="first"
+				ng-if=" (recordDto.booking.delegNum == '1' || recordDto.booking.delegNum == '2'  ||  recordDto.booking.delegNum == '3'  || recordDto.booking.delegNum == '4')  && recordDto.booking.trLocation != '1' && recordDto.booking.trLocation != '16' ">
+				<div class="form-group">
+					<label class="control-label">First Delegate Fee :</label> <input
+						type="text" class="form-control" ng-pattern="/^[0-9]*$/"
+						placeholder="First Delegate Fee" name="firstDelegFee"
+						ng-model="recordDto.invoice.firstDelegFee"
+						ng-keydown="calculateTotal()"
+						onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+				</div>
+			</div>
+
+			<div class="col-md-12" id="second"
+				ng-if=" (recordDto.booking.delegNum == '2' || recordDto.booking.delegNum == '3'  || recordDto.booking.delegNum == '4') && recordDto.booking.trLocation != '1' && recordDto.booking.trLocation != '16' ">
+
+				<div class="form-group">
+					<label class="control-label">Second Delegate Fee :</label> <input
+						type="text" class="form-control" ng-pattern="/^[0-9]*$/"
+						placeholder="Second Delegate Fee" name="secondDelegFee"
+						ng-model="recordDto.invoice.secondDelegFee"
+						ng-keydown="calculateTotal()"
+						onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+				</div>
+			</div>
+
+			<div class="col-md-12" id="third"
+				ng-if=" (recordDto.booking.delegNum == '3' || recordDto.booking.delegNum == '4') && recordDto.booking.trLocation != '1' && recordDto.booking.trLocation != '16' ">
+
+				<div class="form-group">
+					<label class="control-label">Third Delegate Fee :</label> <input
+						type="text" class="form-control" ng-pattern="/^[0-9]*$/"
+						placeholder="Third Delegate Fee" name="thirdDelegFee"
+						ng-model="recordDto.invoice.thirdDelegFee"
+						ng-keydown="calculateTotal()"
+						onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+				</div>
+			</div>
+
+			<div class="col-md-12" id="fourth"
+				ng-if=" recordDto.booking.delegNum == '4' && recordDto.booking.trLocation != '1' && recordDto.booking.trLocation != '16' ">
+
+				<div class="form-group">
+					<label class="control-label">Fourth Delegate Fee :</label> <input
+						type="text" class="form-control" ng-pattern="/^[0-9]*$/"
+						placeholder="Fourth Delegate Fee" name="fourthDelegFee"
+						ng-model="recordDto.invoice.fourthDelegFee"
+						ng-keydown="calculateTotal()"
+						onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group">
+					<label class="control-label">Can. Sur. :</label> <input
+						type="text" class="form-control" placeholder="Can. Sur"
+						name="cancsurCharge" ng-model="recordDto.invoice.cancsurCharge"
+						ng-keydown="calculateTotal()"
+						onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+				</div>
+			</div>
+
+			<div class="col-md-12" ng-if="recordDto.booking.trLocation == '16'">
+				<div class="form-group">
+					<label class="control-label">Cost of Software:</label> <input
+						type="text" class="form-control" placeholder="Cost of software" readonly
+						name="softCost" ng-model="recordDto.invoice.softCost" ng-keydown="calculateTotal()"
+						onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+				</div>
+			</div>
+
+			<div class="col-md-12" ng-if="recordDto.booking.trLocation == '16' ">
+				<div class="form-group">
+					<label class="control-label">Cost of Software Setup:</label> <input
+						type="text" class="form-control" readonly
+						placeholder="Cost of Software Setup" name="softSetup"
+						ng-model="recordDto.invoice.softSetup" ng-keydown="calculateTotal()"
+						onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+				</div>
+			</div>
+
+			<div class="col-md-12" ng-if="recordDto.booking.trLocation == '1'">
+				<div class="form-group">
+					<label class="control-label">Cost of Training:</label> <input
+						type="text" class="form-control" placeholder="Cost of Training"
+						name="trainCost" ng-model="recordDto.invoice.trainCost" ng-keydown="calculateTotal()"
+						onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+				</div>
+			</div>
+
+			<div class="col-md-12"
+				ng-if="recordDto.booking.trLocation == '1' || recordDto.booking.trLocation == '16'">
+				<div class="form-group">
+					<label class="control-label">Additional No. of Delegates:</label> <input
+						type="text" class="form-control"
+						placeholder="Additional No. of Delegates"
+						name="additionalDelegates"
+						ng-model="recordDto.invoice.additionalDelegates" ng-keydown="calculateTotal()"
+						onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+				</div>
+			</div>
+
+			<div class="col-md-12" ng-if="recordDto.booking.trLocation == '1'">
+				<div class="form-group">
+					<label class="control-label">Cost of Travelling:</label> <input
+						type="text" class="form-control"
+						placeholder="Cost of Travelling" name="travelCost"
+						ng-model="recordDto.invoice.travelCost" ng-keydown="calculateTotal()"
+						onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+				</div>
+			</div>
+
+			<div class="col-md-12" style="padding-left: 0px !important;">
+				<div class="form-group ">
+
+					<div class="col-md-8">
+						<label class="control-label">Discount :</label> <input
+							type="text" class="form-control" placeholder="Discount" id= "discount"
+							name="discount" ng-model="recordDto.invoice.discount" ng-keydown="calculateTotal()"
+							onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+					</div>
+					<div class="col-md-2">
+						<label>Vat :</label> <input type="number" class="form-control"
+							style="margin-left: -26px; width: 94px;" name="vatAmount"
+							ng-disabled="recordDto.invoice.chkvat == false" placeholder="Vat"
+							ng-model="recordDto.invoice.vatAmount" readonly
+							onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+					</div>
+					<div class="col-md-2 mt-checkbox-list" style="margin-top: 20px;">
+						<label class="mt-checkbox"> <input type="checkbox"
+							class="form-control" name="vatcheckbox"
+							ng-model="recordDto.invoice.chkvat" ng-change="changeVat()" /> <span></span>
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class=" col-md-6"
+			style="border: 1px solid #e5e5e5; margin-bottom: 10px;">
+			<div class="col-md-12">
+				<div class="form-group">
+					<label class="control-label">School Address :</label>
+					<textarea type="text" class="form-control common-border"
+						id="schAddr" name="schAddr" placeholder="School Adress"
+						ng-model="recordDto.invoice.schAddr"></textarea>
+				</div>
+			</div>
+			<div class="col-md-12" style="padding-left: 0px !important;">
+				<div class="form-group ">
+					<div class="col-md-8">
+						<label class="control-label">Invoice Number :</label> <input
+							type="number" ng-model="recordDto.invoice.id" id="invoiceNum"
+							class="form-control" placeholder="Invoice Number"
+							onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
+					</div>
+					<div class="col-md-4 combo-sapce">
+						<label class="control-label"></label> <select class="form-control"
+							ng-model="recordDto.invoice.paymentType" disabled="disabled">
+							<option value="{{paymentType}}"
+								ng-repeat="paymentType in paymentTypeList"
+								ng-selected="paymentType == recordDto.invoice.paymentType">{{paymentType}}</option>
+						</select>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-12">
+				<div class="form-group">
+					<label class="control-label">Website :</label> <input type="text"
+						class="form-control" placeholder="Website" name="website"
+						ng-model="recordDto.invoice.website">
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group">
+					<label class="control-label">PO No :</label> <input type="number"
+						class="form-control" placeholder="PO No." name="poNo"
+						ng-model="recordDto.invoice.poNo"
+						onkeypress='return event.charCode >= 48 && event.charCode <= 57'></input>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group">
+					<label class="control-label"><b>Total :</b></label> <input
+						type="number" class="form-control number" placeholder="Total"
+						id="total" name="total" ng-model="recordDto.invoice.total"
+						onkeypress='return event.charCode >= 48 && event.charCode <= 57'></input>
+				</div>
+			</div>
+		</div>
+
+		<div class=" col-md-12"
+			style="border: 1px solid #e5e5e5; margin-bottom: 5px;">
+			<div class="col-md-8">
+				<div class="form-group">
+					<label class="control-label">Notes :</label>
+					<textarea type="text" class="form-control common-border"
+						name="inNotes" placeholder="Notes"
+						ng-model="recordDto.invNotesTab.inNotes"></textarea>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<label class="control-label">Consultant :</label> <select
+					class="form-control" ng-model="recordDto.booking.consultant"
+					name="consultant">
+					<option value="{{consultant.id}}"
+						ng-repeat="consultant in consultantList"
+						ng-selected="consultant.id == booking.consultant">{{consultant.consultants}}</option>
+				</select>
+			</div>
+		</div>
+	</div>
+</div>

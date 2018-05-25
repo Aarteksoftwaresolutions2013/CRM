@@ -1,0 +1,171 @@
+<script>
+	jQuery(document).ready(function() {
+		ComponentsDateTimePickers.init()
+	});
+</script>
+
+<div class="container-fluid" ng-class="{'my-disable' : !visibleConfirm}">
+	<div class="form-body" style="border-top: 1px solid #e5e5e5">
+		<div class=" col-md-10"
+			style="border: 1px solid #e5e5e5; padding: 8px;">
+			<div class="col-md-6">
+				<div class="form-group">
+					<!-- <label>Outline Checkboxes</label> -->
+					<div class="mt-checkbox-list">
+						<label class="mt-checkbox mt-checkbox-outline"> Contact
+							Consultant with desired dates <input type="checkbox" value="1"
+							name="schoolGenRol"
+							ng-model="recordDto.confirmation.schoolGenRol" /> <span></span>
+						</label> <label class="mt-checkbox mt-checkbox-outline"> School
+							Confirmed the date <input type="checkbox" value="1"
+							name="schConfirmDate"
+							ng-model="recordDto.confirmation.schConfirmDate" /> <span></span>
+						</label> <label class="mt-checkbox mt-checkbox-outline"> Confirmed
+							with trainer <input type="checkbox" value="1"
+							name="trainerConfirmed"
+							ng-model="recordDto.confirmation.trainerConfirmed"
+							 /> <span></span>
+						</label> <label class="mt-checkbox mt-checkbox-outline"> Sent
+							requirements email <input type="checkbox" value="1"
+							name="repPrinted" ng-model="recordDto.confirmation.repPrinted"
+							 /> <span></span>
+						</label> <label class="mt-checkbox mt-checkbox-outline"> Received
+							delegate list <input type="checkbox" value="1" name="presentPrep"
+							ng-model="recordDto.confirmation.presentPrep"  /> <span></span>
+						</label> <label class="mt-checkbox mt-checkbox-outline"> Training
+							materials sent on and school informed <input type="checkbox"
+							value="1" name="oneDayRemind"
+							ng-model="recordDto.confirmation.oneDayRemind" /> <span></span>
+						</label>
+						<div class="form-group">
+							<label class="control-label">Requirement confirmed on :</label>
+							<div>
+								<div class="input-group date form_datetime bs-datetime"
+									data-date-format="yyyy-mm-dd hh:ii:ss">
+									<input class="form-control" size="16" type="text" value=""
+										readonly
+										ng-model="recordDto.confirmation.inHouseRequirementConfirmedOn"
+										name="requirementconfirmedOn" /> <span
+										class="input-group-addon">
+										<button class="btn default date-reset" type="button">
+											<i class="fa fa-times"></i>
+										</button>
+									</span> <span class="input-group-addon">
+										<button class="btn default date-set" type="button">
+											<i class="fa fa-calendar"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+						</div>
+
+						<label class="mt-checkbox mt-checkbox-outline"> School
+							aware of PC/laptop, internet and projector requirements <input
+							type="checkbox" value="1" name="schoolAwareReq"
+							ng-model="recordDto.confirmation.schoolAwareReq"
+							 /> <span></span>
+						</label> <label class="mt-checkbox mt-checkbox-outline"> Someone
+							from school know username and password for RAISE and FFT <input
+							type="checkbox" value="1" name="userPasKnowSchool"
+							ng-model="recordDto.confirmation.userPasKnowSchool"
+							 /> <span></span>
+						</label> <label class="mt-checkbox mt-checkbox-outline"> Received
+							Inspection Dashboard <input type="checkbox" value="1"
+							name="journeyPlan" ng-model="recordDto.confirmation.journeyPlan"
+							/> <span></span>
+						</label> <label class="mt-checkbox mt-checkbox-outline"> Received
+							location confirmation and expectations <input type="checkbox"
+							value="1" name="receivedLocation"
+							ng-model="recordDto.confirmation.receivedLocation"
+							 /> <span></span>
+						</label> <label class="mt-checkbox mt-checkbox-outline"> Training
+							material created <input type="checkbox" value="1"
+							name="trainingMaterialCreated"
+							ng-model="recordDto.confirmation.trainingMaterialCreated"
+							/> <span></span>
+						</label>
+					</div>
+					<!-- </end check box> -->
+				</div>
+			</div>
+			<!-- ------ Done  -->
+
+			<div class="col-md-6">
+				<div class="form-group">
+					<!-- <label>Outline Checkboxes</label> -->
+					<div class="mt-checkbox-list">
+						<label class="mt-checkbox mt-checkbox-outline">
+							Information on schools, delegates, address, and inspection
+							Dashboard sent to consultant <input type="checkbox" value="1"
+							name="informationOnSchools"
+							ng-model="recordDto.confirmation.informationOnSchools"
+							/> <span></span>
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row col-md-2" style="margin-left: -5px !important;">
+			<div class="form-group">
+				<label class="control-label"><b>Notes :</b></label>
+				<textarea rows="26" type="text" id="firstName"
+					class="form-control common-border" name="inHouseNotes"
+					ng-model="recordDto.confirmation.inHouseNotes"></textarea>
+			</div>
+		</div>
+
+		<div class=" col-md-12"
+			style="border: 1px solid #e5e5e5; padding: 8px;" ng-class="{'my-disable' : true}">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group">
+						<label class="control-label">Link Sent on :</label>
+						<div>
+							<div class="input-group date form_datetime bs-datetime"
+								data-date-format="yyyy-mm-dd hh:ii:ss">
+								<input class="form-control" size="16" type="text" value="" 
+									readonly ng-model="recordDto.confirmation.linkSent"> <span
+									class="input-group-addon">
+									<button class="btn default date-reset" type="button">
+										<i class="fa fa-times"></i>
+									</button>
+								</span> <span class="input-group-addon">
+									<button class="btn default date-set" type="button">
+										<i class="fa fa-calendar"></i>
+									</button>
+								</span>
+							</div>
+
+
+							<!-- /input-group -->
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4"></div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label class="control-label">Information Sent on :</label>
+						<div>
+							<div class="input-group date form_datetime bs-datetime"
+								data-date-format="yyyy-mm-dd hh:ii:ss">
+								<input class="form-control" size="16" type="text" value="" 
+																	readonly ng-model="recordDto.confirmation.infoSent"> <span
+									class="input-group-addon">
+									<button class="btn default date-reset" type="button">
+										<i class="fa fa-times"></i>
+									</button>
+								</span> <span class="input-group-addon">
+									<button class="btn default date-set" type="button">
+										<i class="fa fa-calendar"></i>
+									</button>
+								</span>
+							</div>
+							<!-- /input-group -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- </form close> -->
+	</div>
+</div>

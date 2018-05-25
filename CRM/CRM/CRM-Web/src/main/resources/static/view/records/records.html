@@ -1,0 +1,518 @@
+<div class="page-header-fixed page-sidebar-closed-hide-logo mainCtrl">
+	<div class="wrapper">
+		<div class="container-fluid">
+			<div class="page-content">
+				<div class="tab-content">
+					<div class="tab-pane active" id="tab_0">
+						<div class="portlet box green">
+							<div class="portlet-title">
+								<div class="caption" style="margin-left: 44%;">
+									<i class="fa fa-gift"></i>Records
+								</div>
+								<div class="tools">
+									<a href="javascript:;" class="collapse"> </a> <a
+										href="#portlet-config" data-toggle="modal" class="config">
+									</a> <a href="javascript:;" class="reload"> </a> <a
+										href="javascript:;" class="remove"> </a>
+								</div>
+							</div>
+							<div class="tab-pane" id="tab_1">
+								<div class="portlet box blue">
+
+									<div class="portlet-body form">
+										<!-- BEGIN FORM-->
+										<form name="editForm" id="form1" action="javascript:;"
+											class="horizontal-form" ng-submit="saveRecords(editForm)"
+											novalidate="novalidate">
+
+											<div class="form-body">
+												<!-- <h3 class="form-section">Add/Update Sales Person Details</h3> -->
+												<legend>Edit Information</legend>
+
+												<div class="col-md-10" id ="print" style="border: 1px solid #e5e5e5">
+													<div class="row">
+														<div class="col-md-6">
+															<div class="form-group">
+																<label class="control-label"><required-field />Title
+																	: </label> <select class="form-control" id="title"
+																	ng-model="recordDto.booking.title" required
+																	name="title">
+																	<option value="{{title}}" ng-repeat="title in titles"
+																		ng-selected="title == recordDto.booking.title">{{title}}</option>
+																</select> <span style="color: Red"
+																	ng-show="editForm.title.$dirty && editForm.title.$error.required">
+																	This field is required.! </span>
+															</div>
+														</div>
+														<!--/span-->
+														<div class="col-md-6">
+															<div class="form-group">
+																<label class="control-label">Message :</label>
+																<textarea type="text" class="form-control common-border" id="message"
+																	placeholder="Message" name="Message"
+																	ng-model="recordDto.booking.notes"></textarea>
+															</div>
+														</div>
+														<!--/span-->
+													</div>
+													<div class="row">
+														<div class="col-md-6">
+															<div class="form-group">
+																<label class="control-label"><required-field />Full
+																	Name :</label> <input type="text" class="form-control" id="fullName"
+																	name="fullName" placeholder="Full Name"
+																	ng-model="recordDto.booking.fName" required="required">
+																<span style="color: Red"
+																	ng-show="editForm.fullName.$dirty && editForm.fullName.$error.required">
+																	This field is required.! </span>
+															</div>
+														</div>
+														<!--/span-->
+														<div class="col-md-6">
+															<div class="form-group">
+																<label class="control-label">Callback Time :</label>
+																<div>
+																	<div class="input-group date form_datetime bs-datetime"
+																		data-date-format="dd-mm-yyyy hh:ii:ss">
+																		<input class="form-control" size="16" type="text"
+																			value="" readonly
+																			ng-model="recordDto.booking.callBackTime"
+																			name="callbakTime"> <span
+																			class="input-group-addon">
+																			<button class="btn default date-reset" type="button">
+																				<i class="fa fa-times"></i>
+																			</button>
+																		</span> <span class="input-group-addon">
+																			<button class="btn default date-set" type="button">
+																				<i class="fa fa-calendar"></i>
+																			</button>
+																		</span>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!--/span-->
+													</div>
+													<div class="row">
+														<div class="col-md-6">
+															<div class="form-group">
+																<label class="control-label"><required-field />School
+																	Name :</label> <input type="text" class="form-control"
+																	name="schoolName" placeholder="School Name" id="schoolName"
+																	ng-model="recordDto.booking.scName" required="required">
+																<span style="color: red;"
+																	ng-show="editForm.schoolName.$dirty && editForm.schoolName.$error.required">This
+																	field is required.</span>
+															</div>
+														</div>
+														<!--/span-->
+														<div class="col-md-6">
+															<div class="form-group">
+																<label class="control-label">Second Delegate :</label> <input
+																	type="text" class="form-control" id="secondDeleg"
+																	placeholder="Second Delegate" name="secondDeleg"
+																	ng-model="recordDto.booking.secondDeleg">
+															</div>
+														</div>
+														<!--/span-->
+													</div>
+													<div class="row">
+														<div class="col-md-6">
+															<div class="form-group">
+																<label class="control-label"><required-field />Course
+																	Name :</label> <select class="form-control" id="training"  name="courseName"
+																	required="required"
+																	ng-model="recordDto.booking.training">
+																	<option value="{{training.tId}}"
+																		ng-repeat="training in trainingList"
+																		ng-selected="training.tName == recordDto.booking.trainingName">{{training.tName}}</option>
+																</select> <span class="help-inline" style="color: red;"
+																	ng-show="editForm.courseName.$dirty && editForm.courseName.$error.required">This
+																	field is required.</span>
+															</div>
+														</div>
+														<!--/span-->
+														<div class="col-md-6">
+															<div class="form-group">
+																<label class="control-label">Third Delegate :</label> <input
+																	type="text" class="form-control" id="thirdDeleg"
+																	placeholder="Third Delegate" name="thirdDeleg"
+																	ng-model="recordDto.booking.thirdDeleg">
+															</div>
+														</div>
+														<!--/span-->
+													</div>
+													<div class="row">
+														<div class="col-md-6">
+															<div class="form-group">
+																<label class="control-label"><required-field />
+																	Training Date :</label>
+																<div>
+																	<div class="input-group input-medium date date-picker"
+																		data-date-format="dd-mm-yyyy"
+																		data-date-start-date="+0d"
+																		style="width: 100% !important;">
+																		<input type="text" class="form-control" id="trDate" readonly
+																			name="trainingDate" required="required"
+																			ng-model="recordDto.booking.trDateDummy"> <span
+																			class="input-group-btn">
+																			<button class="btn default" type="button">
+																				<i class="fa fa-calendar"></i>
+																			</button>
+																		</span> <span class="help-inline" style="color: red;"
+																			ng-show="editForm.trainingDate.$dirty && editForm.trainingDate.$error.required">This
+																			field is required.</span>
+																	</div>
+
+																	<!-- /input-group -->
+																</div>
+
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="form-group">
+																<label class="control-label">Fourth Delegate :</label> <input
+																	type="text" class="form-control"
+																	placeholder="Fourth delegate" name="fourthDeleg"
+																	ng-model="recordDto.booking.fourthDeleg">
+															</div>
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-md-6"
+															style="padding-left: 0px !important;">
+															<div class="form-group col-md-4">
+																<label class="control-label">Time From :</label>
+																<div class="input-group">
+																	<input type="text" name="timeFrom" id="startTime"
+																		class="form-control timepicker timepicker-24"
+																		ng-model="recordDto.booking.startTime"></input> <span
+																		class="input-group-btn">
+																		<button class="btn default" type="button">
+																			<i class="fa fa-clock-o"></i>
+																		</button>
+																	</span>
+																</div>
+															</div>
+															<div class="form-group col-md-4">
+																<label class="control-label">To :</label>
+																<div class="input-group">
+																	<input type="text" name="to" id="endTime"
+																		class="form-control timepicker timepicker-24"
+																		ng-model="recordDto.booking.endTime"> <span
+																		class="input-group-btn">
+																		<button class="btn default" type="button">
+																			<i class="fa fa-clock-o"></i>
+																		</button>
+																	</span>
+																</div>
+															</div>
+															<div class="form-group col-md-4">
+																<label class="control-label"><required-field />Phase
+																	:</label> <select class="form-control" name="bookingPhase"
+																	required="required"
+																	ng-model="recordDto.booking.bookingPhase">
+																	<option value="{{phase}}"
+																		ng-repeat="phase in phaseList"
+																		ng-selected="phase == booking.bookingPhase">{{phase}}</option>
+
+																</select> <span class="help-inline" style="color: red;"
+																	ng-show="editForm.phase.$dirty && editForm.phase.$error.required">This
+																	field is required.</span>
+															</div>
+														</div>
+														<!--/span-->
+														<div class="col-md-6">
+															<div class="form-group">
+																<label class="control-label">Finance Email :</label> <input
+																	type="text" class="form-control"
+																	placeholder="Finance Email" name="financeEmail" id="invEmail"
+																	ng-model="recordDto.booking.invEmail"
+																	ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" /> <span
+																	style="color: Red"
+																	ng-show="editForm.financeEmail.$error.pattern">Please
+																	Enter Valid Email</span>
+															</div>
+														</div>
+														<!--/span-->
+													</div>
+													<div class="row">
+														<div class="col-md-6">
+															<div class="form-group">
+																<label class="control-label"><required-field />Training
+																	Location :</label> <select class="form-control" id="trLocation"
+																	name="trainingLocation" required="required"
+																	ng-model="recordDto.booking.trLocation" ng-change="saveVenue()">
+																	<option value="{{trLocation.trLId}}"
+																		ng-repeat="trLocation in trainingLocationList"
+																		ng-selected="trLocation.trLocation == recordDto.booking.trainingLocation">{{trLocation.trLocation}}</option>
+																</select>
+															</div>
+															<span class="help-inline" style="color: red;"
+																ng-show="editForm.trainingLocation.$dirty && editForm.trainingLocation.$error.required">This
+																field is required.</span>
+														</div>
+														<!--/span-->
+														<div class="col-md-6">
+															<div class="form-group">
+																<label class="control-label">Second Delegate
+																	Email :</label> <input type="text" class="form-control"
+																	placeholder="Second Delegate Email"
+																	name="secondDelegEmail"
+																	ng-model="recordDto.booking.secondDelegEmail"
+																	ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"> <span
+																	style="color: Red"
+																	ng-show="editForm.secondDelegEmail.$error.pattern">Please
+																	Enter Valid Email</span>
+															</div>
+														</div>
+														<!--/span-->
+													</div>
+													<div class="row">
+														<div class="col-md-6"
+															style="padding-left: 0px !important;">
+															<div class="form-group col-md-4">
+																<label class="control-label"><required-field />Status
+																	:</label> <select class="form-control" id="status" name="status"
+																	required="required" ng-model="recordDto.booking.status">
+																	<option value="{{status}}"
+																		ng-repeat="status in statusList"
+																		ng-selected="status == recordDto.booking.status">{{status}}</option>
+																</select> <span class="help-inline" style="color: red;"
+																	ng-show="editForm.status.$dirty && editForm.status.$error.required">This
+																	field is required.</span>
+															</div>
+															<div class="form-group col-md-4">
+																<label class="control-label"><required-field />Session
+																	:</label> <select class="form-control" name="session"
+																	required="required" q
+																	ng-model="recordDto.booking.bookingSession">
+																	<option value="{{session}}"
+																		ng-repeat="session in sessions"
+																		ng-selected="session == recordDto.booking.bookingSession">{{session}}</option>
+																</select> <span class="help-inline" style="color: red;"
+																	ng-show="editForm.session.$dirty && editForm.session.$error.required">This
+																	field is required.</span>
+															</div>
+														</div>
+														<!--/span-->
+														<div class="col-md-6">
+															<div class="form-group">
+																<label class="control-label">Third Delegate
+																	Email :</label> <input type="text" class="form-control"
+																	placeholder="Third Delegate Email"
+																	name="thirdDelegEmail"
+																	ng-model="recordDto.booking.thirdDelegEmail"
+																	ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"> <span
+																	style="color: Red"
+																	ng-show="editForm.thirdDelegEmail.$error.pattern">Please
+																	Enter Valid Email</span>
+															</div>
+														</div>
+														<!--/span-->
+													</div>
+													<div class="row">
+														<div class="col-md-6">
+															<div class="form-group">
+																<label class="control-label"><required-field />Number
+																	of Delegates :</label> <select class="form-control" id="delegNum"
+																	name="noOfDelegate" required="required"
+																	ng-model="recordDto.booking.delegNum">
+																	<option value="{{noOfDelegate}}"
+																		ng-repeat="noOfDelegate in numberOfDelegates"
+																		ng-selected="noOfDelegate == recordDto.booking.delegNum">{{noOfDelegate}}</option>
+																</select> <span class="help-inline" style="color: red;"
+																	ng-show="editForm.noOfDelegate.$dirty && editForm.noOfDelegate.$error.required">This
+																	field is required.</span>
+															</div>
+														</div>
+														<!--/span-->
+														<div class="col-md-6">
+															<div class="form-group">
+																<label class="control-label">Fourth Delegate
+																	Email :</label> <input type="text" class="form-control"
+																	ng-model="recordDto.booking.fourthDelegEmail"
+																	name="fourthDelegEmail"
+																	placeholder="Fourth Delegate Email"
+																	ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"> <span
+																	style="color: Red"
+																	ng-show="editForm.fourthDelegEmail.$error.pattern">Please
+																	Enter Valid Email</span>
+															</div>
+														</div>
+														<!--/span-->
+													</div>
+													<div class="row">
+														<div class="col-xs-6" style="padding-left: 0px;">
+															<div>
+																<div class="col-xs-11">
+																	<label class="control-label"><required-field />
+																		Telephone :</label> <input type="text" class="form-control" id="telephone"
+																		name="telephone" required="required"
+																		placeholder="Telephone"
+																		ng-model="recordDto.booking.tel"><span
+																		class="help-inline" style="color: red;"
+																		ng-show="editForm.telephone.$dirty && editForm.telephone.$error.required">This
+																		field is required.</span>
+																</div>
+																<div class="col-sm-1">
+																	<img src="images/called_Phone.png"
+																		ng-click="DialByURL()" class="dialByImg">
+																</div>
+
+															</div>
+														</div>
+														<!--/span-->
+														<div class="col-xs-6">
+															<div class="form-group">
+																<label class="control-label"><required-field />Email
+																	:</label> <input type="text" class="form-control" id="email"
+																	placeholder="Email" name="email"
+																	ng-model="recordDto.booking.email"
+																	ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"
+																	required="required"> <span style="color: Red"
+																	ng-show="editForm.email.$error.pattern">Please
+																	Enter Valid Email</span> <span class="help-inline"
+																	style="color: red;"
+																	ng-show="editForm.email.$dirty && editForm.email.$error.required">This
+																	field is required.</span>
+															</div>
+														</div>
+														<!--/span-->
+													</div>
+												</div>
+												<div class="col-md-2" style="border: 1px solid #e5e5e5">
+													<div class="col-md-12">
+														<div class="form-group">
+															<label class="control-label">Bookings and
+																Enquiries you can navigate to :</label>
+															<!-- <textarea rows="35" type="text" class="form-control"
+																placeholder="School Adress" disabled="disabled"></textarea> -->
+																<select name="cars" multiple style = "height: 100%; width: 101%;" ng-model = "selectedBookingId">
+                                                                   <option value="{{user.bId}}"  ng-repeat = "user in userListByTrDate" ng-click = "chengeBookingByUser()">{{user.fullName}}</option></select>
+														</div>
+													</div>
+												</div>
+												<!--/row-->
+
+												<div style="border: 1px solid #e5e5e5">
+													<div class="col-md-12" style="padding: 2px;">
+														<ul class="nav nav-tabs">
+															<li class="active"><a href="" data-toggle="tab"
+																class="records" ng-click="onClickTab('invoice')">
+																	Invoice </a></li>
+															<li class=""><a href="" data-toggle="tab"
+																class="records" ng-click="onClickTab('invoiceDetails')">
+																	Invoice Details </a></li>
+															<li class=""><a href="" data-toggle="tab"
+																class="records"
+																ng-click="onClickTab('confirmationInHouse')">
+																	Confirmation InHouse </a></li>
+															<li><a href="" data-toggle="tab" class="records"
+																ng-click="onClickTab('confirmationLocation')">
+																	Confirmation Location </a></li>
+															<li><a href="" data-toggle="tab" class="records"
+																ng-click="onClickTab('asset')"> Asset </a></li>
+															<li><a href="" data-toggle="tab" class="records"
+																ng-click="onClickTab('tracking')"> Tracking </a></li>
+															<li><a href="" data-toggle="tab" class="records"
+																ng-click="onClickTab('delegateList')"> Delegate List
+															</a></li>
+															<li><a href="" data-toggle="tab" class="records"
+																ng-click="onClickTab('expectations')"> Expectations
+															</a></li>
+															<li><a href="" data-toggle="tab" class="records"
+																ng-click="onClickTab('marketing')"> Marketing </a></li>
+															<li><a href="" data-toggle="tab" class="records"
+																ng-click="onClickTab('reminder')"> Reminder </a></li>
+															<li><a href="" data-toggle="tab" class="records"
+																ng-click="onClickTab('booking')"> Booking </a></li>
+															<li><a href="" data-toggle="tab" class="records"
+																ng-click="onClickTab('log')"> LOG </a></li>
+															<li></li>
+														</ul>
+													</div>
+													<div class="modal-container"></div>
+													
+													<!--Include another content  -->
+													<div id="invoice" ng-include="'view/records/invoice.html'"></div>
+													<div id="invoiceDetails"
+														ng-include="'view/records/invoiceDetails.html'"
+														class="defaultNone"></div>
+													<div id="confirmationInHouse"
+														ng-include="'view/records/confirmationInHouse.html'"
+														class="defaultNone"></div>
+													<div id="confirmationLocation"
+														ng-include="'view/records/confirmationLocation.html'"
+														class="defaultNone"></div>
+													<div id="asset" ng-include="'view/records/asset.html'"
+														class="defaultNone"></div>
+													<div id="tracking"
+														ng-include="'view/records/tracking.html'"
+														class="defaultNone"></div>
+													<div id="delegateList"
+														ng-include="'view/records/delegateList.html'"
+														class="defaultNone"></div>
+													<div id="expectations"
+														ng-include="'view/records/expectations.html'"
+														class="defaultNone"></div>
+													<div id="marketing"
+														ng-include="'view/records/marketing.html'"
+														class="defaultNone"></div>
+													<div id="reminder"
+														ng-include="'view/records/reminder.html'"
+														class="defaultNone"></div>
+													<div id="booking" ng-include="'view/records/booking.html'"
+														class="defaultNone"></div>
+													<div id="log" ng-include="'view/records/log.html'"
+														class="defaultNone"></div>
+													<!-- End -->
+
+													<div class="form-actions right">
+														<button type="button" ng-disabled="index == 0"
+															ng-click="previousRecord()"
+															class="btn default btn-footer btn-responsive">Previous</button>
+														<button type="button"
+															ng-disabled="index == bookingArrLength"
+															ng-click="nextRecord()"
+															class="btn default btn-footer btn-responsive">Next</button>
+														<button type="button" ng-click="createAndSendInvoice()"
+															class="btn default btn-footer btn-responsive">Create
+															and send Invoice</button>
+														<button type="button" ng-click=""
+															class="btn default btn-footer btn-responsive">Send
+															Confirmation Email</button>
+														<button type="button" ng-click="generatePdf()"
+															class="btn default btn-footer btn-responsive">Print
+															Planner</button>
+														<button type="button" ng-click="exportPlanner()"
+															class="btn default btn-footer btn-responsive">Export
+															Planner</button>
+														<button type="button" ng-click=""
+															class="btn default btn-footer btn-responsive">Emails</button>
+														<button type="submit" ng-click="saveSuccess()"
+															class="btn default btn-footer btn-responsive" 
+															ng-disabled="editForm.$invalid">Save Changes</button>
+														<button type="button" ng-click="onExit()"
+															class="btn default btn-footer btn-responsive">Exit</button>
+														<!-- <button type="button"
+															ng-click="deleteSalesPerson(salesPerson)"
+															class="btn default btn-footer btn-responsive">Delete</button> -->
+														<button type="button" ng-click="clearFields()"
+															class="btn default btn-footer btn-responsive">Clear</button>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+								<!-- END FORM-->
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

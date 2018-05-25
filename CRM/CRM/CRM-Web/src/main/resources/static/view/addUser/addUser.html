@@ -1,0 +1,104 @@
+<div class="page-header-fixed page-sidebar-closed-hide-logo">
+	<div class="wrapper">
+		<div class="container-fluid">
+			<div class="page-content">
+				<div class="tab-content">
+					<div class="tab-pane active" id="tab_0">
+						<div class="portlet box green">
+							<div class="portlet-title">
+								<div class="caption" style="margin-left: 44%;">
+									<i class="fa fa-gift"></i>Add User
+								</div>
+								<div class="tools">
+									<a href="javascript:;" class="collapse"> </a> <a
+										href="#portlet-config" data-toggle="modal" class="config">
+									</a> <a href="javascript:;" class="reload"> </a> <a
+										href="javascript:;" class="remove"> </a>
+								</div>
+							</div>
+							<div class="tab-pane" id="tab_1">
+								<div class="portlet box blue">
+
+									<div class="portlet-body form">
+
+										<form name="addUserForm" action="javascript:;"
+											class="horizontal-form" ng-submit="addUser()"
+											novalidate="novalidate">
+
+											<div class="form-body">
+												<!-- <h3 class="form-section">Add/Update Sales Person Details</h3> -->
+												<legend>Add/Update User Details</legend>
+												<div class="row">
+													<div class="col-md-6">
+
+														<div class="col-md-12">
+															<div class="form-group">
+																<label class="control-label">Department</label> <select
+																	class="form-control" placeholder="Department"
+																	name="title" ng-model="user.department">
+																	<option ng-repeat="department in departmentList"
+																		value="{{department}}">{{department}}</option>
+																</select>
+															</div>
+														</div>
+
+														<div class="col-md-12">
+															<div class="form-group">
+																<label class="control-label">Username</label> <input
+																	type="text" class="form-control" placeholder="Username"
+																	ng-model="user.userName">
+															</div>
+														</div>
+
+														<div class="col-md-12">
+															<div class="form-group">
+																<label class="control-label">Password</label> <input
+																	type="password" class="form-control"
+																	placeholder="Password" ng-model="user.password">
+															</div>
+														</div>
+
+														<div class="col-md-12">
+															<div class="form-group">
+																<label class="control-label">Dial by URL</label> <input
+																	type="text" class="form-control"
+																	placeholder="Dial by URL" ng-model="user.dialByURL">
+															</div>
+														</div>
+
+														<div class="form-Submit-button-left">
+															<button type="submit" class="btn blue"
+																ng-disabled="!(!!user.department && !!user.userName  && !!user.password && !!user.dialByURL)">Submit</button>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="col-md-12">
+															<div class="form-group">
+																<select size="14" multiple ng-model="selectedItem"
+																	ng-change="editUser()" selected>
+																	<option value="{{user.id}}"
+																		ng-repeat="user in userList">{{user.userName}}</option>
+																</select><br> <br />
+															</div>
+														</div>
+														<div class="form-actionsNew">
+															<button type="button" class="btn blue">Add</button>
+															<button type="button" class="btn blue"
+																ng-click="deleteUser()">Delete Selected</button>
+														</div>
+													</div>
+
+
+												</div>
+										</form>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

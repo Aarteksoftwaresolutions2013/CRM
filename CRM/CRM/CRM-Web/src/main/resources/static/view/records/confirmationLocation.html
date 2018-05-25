@@ -1,0 +1,286 @@
+<script>
+	jQuery(document).ready(function() {
+		ComponentsDateTimePickers.init()
+	});
+</script>
+
+<div class="container-fluid" ng-class="{'my-disable' : visibleConfirm}">
+	<div class="form-body">
+		<div class="row">
+			<div class=" col-md-5 text-left">
+				<fieldset>
+					<legend>Training Location :</legend>
+					<div class="mt-checkbox-list">
+						<label class="mt-checkbox mt-checkbox-outline"> <input
+							name="delegLaptop" type="checkbox"
+							ng-model="recordDto.confirmation.delegLaptop" />
+							Delegate will bring laptop with no restrictions <span></span>
+						</label> <label class="mt-checkbox mt-checkbox-outline"> <input
+							name="bringRolFFT" type="checkbox"
+							ng-model="recordDto.confirmation.bringRolFFT" /> Bring
+							ROL FFT logins <span></span>
+						</label> <label class="mt-checkbox mt-checkbox-outline"> <input
+							name="rolPecPrint" type="checkbox"
+							ng-model="recordDto.confirmation.rolPecPrint" /> Bring
+							printed Inspection Dashboard (Color-Copy) <span></span>
+						</label> <label class="mt-checkbox mt-checkbox-outline"> <input
+							name="delegRem1Week" type="checkbox"
+							ng-model="recordDto.confirmation.delegRem1Week" />
+							Requirements email sent <span></span>
+						</label>
+					</div>
+
+					<div class=" col-md-12">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="control-label "> Requirement Confirmed on
+									:</label>
+								<div>
+									<div class="input-group date form_datetime bs-datetime"
+										data-date-format="yyyy-mm-dd hh:ii:ss">
+										<input class="form-control" size="16" type="text" value=""
+											readonly=""
+											ng-model="recordDto.confirmation.trainingLocationRequirementConfirmedOn"
+											name="requirementconfirmedOn" /> <span
+											class="input-group-addon">
+											<button class="btn default date-reset" type="button">
+												<i class="fa fa-times"></i>
+											</button>
+										</span> <span class="input-group-addon">
+											<button class="btn default date-set" type="button">
+												<i class="fa fa-calendar"></i>
+											</button>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class=" col-md-12">
+						<div class=" col-md-12">
+							<div class="form-group">
+								<label class="control-label"> Delegate Confirmed
+									attendence on :</label>
+								<div>
+									<div class="input-group date form_datetime bs-datetime"
+										data-date-format="yyyy-mm-dd hh:ii:ss">
+										<input class="form-control" size="16" type="text" value=""
+											readonly=""
+											ng-model="recordDto.confirmation.trainingLocationDelegateConfirmedOn"
+											name="delegateconfirmedOn" /> <span
+											class="input-group-addon">
+											<button class="btn default date-reset" type="button">
+												<i class="fa fa-times"></i>
+											</button>
+										</span> <span class="input-group-addon">
+											<button class="btn default date-set" type="button">
+												<i class="fa fa-calendar"></i>
+											</button>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="mt-checkbox-list">
+							<label class="mt-checkbox mt-checkbox-outline col-md-12">
+								<input type="checkbox"
+								ng-model="recordDto.confirmation.trainerConfirmed2"
+								name="TrainerConfirmed2" />
+								Confirmed with trainer <span></span>
+							</label>
+
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="mt-checkbox-list">
+							<label class="mt-checkbox mt-checkbox-outline col-md-8">
+								<input type="checkbox" name="delegLaptop"
+								ng-model="recordDto.confirmation.attendanceConfirmed" /> Confirmation
+								recieved by <span></span>
+							</label>
+
+							<div class="col-md-4">
+								<label class="control-label">by</label> <select
+									class="form-control" ng-model="recordDto.confirmation.attendanceConfirmedBy"
+									name="consultant">
+									<option value="{{confirmedBy}}"
+										ng-repeat="confirmedBy in confirmationLocation"
+										ng-selected="confirmedBy == booking.consultant">{{confirmedBy}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+
+
+
+
+				</fieldset>
+			</div>
+			<div class="col-md-5 text-left">
+				<fieldset>
+					<legend>Training Location In Requirements :</legend>
+					<div class="mt-checkbox-list">
+						<label class="mt-checkbox mt-checkbox-outline"> <input
+							type="checkbox" name="hotelHasAProjector"
+							ng-model="recordDto.confirmation.hotelHasAProjector" />
+							Hotel has a projector and screen but not a TV screen <span></span>
+						</label> <label class="mt-checkbox mt-checkbox-outline"> <input
+							name="hotelHasWifi" type="checkbox"
+							ng-model="recordDto.confirmation.hotelHasWifi" /> Hotel
+							has very good WIFI coverage included - Online Course <span></span>
+						</label> <label class="mt-checkbox mt-checkbox-outline"> <input
+							type="checkbox" name="hotelHasExtensionLeads"
+							ng-model="recordDto.confirmation.hotelHasExtensionLeads" />
+							Hotels have extension leads available <span></span>
+						</label> <label class="mt-checkbox mt-checkbox-outline"> <input
+							name="hotelHasTea" type="checkbox"
+							ng-model="recordDto.confirmation.hotelHasTea" /> Hotel
+							has 9am tea and coffee included <span></span>
+						</label> <label class="mt-checkbox mt-checkbox-outline"> <input
+							name="hotelHasLunch" type="checkbox"
+							ng-model="recordDto.confirmation.hotelHasLunch" />
+							Hotels have 12:30pm hot lunch included <span></span>
+						</label> <label class="mt-checkbox mt-checkbox-outline"> <input
+							type="checkbox" name="hotelHasAfterNoonTea"
+							ng-model="recordDto.confirmation.hotelHasAfterNoonTea" />
+							Hotel have 2:30pm tea and coffee included <span></span>
+						</label>
+					</div>
+
+					<div class="row">
+
+
+						<div class="form-group">
+							<label class="control-label col-md-6">Price :</label>
+							<div class="col-md-6">
+								<input type="text" class="form-control" placeholder="Price"
+									ng-model="recordDto.confirmation.price" name="price">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class=" col-md-12">
+							<div class="mt-checkbox-list">
+								<label class="mt-checkbox mt-checkbox-outline"> <input
+									type="checkbox" name="contactsReceived"
+									ng-model="recordDto.confirmation.contactsReceived" />
+									Contacts Received <span></span></label>
+
+							</div>
+						</div>
+						<div class=" col-md-12">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label ">Contacts Signed And Sent
+										On :</label>
+									<div>
+										<div class="input-group date form_datetime bs-datetime"
+											data-date-format="yyyy-mm-dd hh:ii:ss">
+											<input class="form-control" size="16" type="text" value=""
+												readonly="" ng-model="recordDto.confirmation.contactsSigned"
+												name="contactSignedAndSentOn" /> <span
+												class="input-group-addon">
+												<button class="btn default date-reset" type="button">
+													<i class="fa fa-times"></i>
+												</button>
+											</span> <span class="input-group-addon">
+												<button class="btn default date-set" type="button">
+													<i class="fa fa-calendar"></i>
+												</button>
+											</span>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<div class=" col-md-12">
+							<div class="mt-checkbox-list">
+								<label class="mt-checkbox mt-checkbox-outline"> <input
+									type="checkbox"
+									name="confirmationLocationTrainingMaterialCreated"
+									ng-model="recordDto.confirmation.confirmationLocationTrainingMaterialCreated" />
+									Training Materials Created <span></span></label>
+
+							</div>
+						</div>
+						<div class=" col-md-12">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label ">Training Material Sent On
+										:</label>
+									<div>
+										<div class="input-group date form_datetime bs-datetime"
+											data-date-format="yyyy-mm-dd hh:ii:ss">
+											<input class="form-control" size="16" type="text" value=""
+												readonly=""
+												ng-model="recordDto.confirmation.trainingMaterialSentOn"
+												name="trMaterialAndSentOn" /> <span
+												class="input-group-addon">
+												<button class="btn default date-reset" type="button">
+													<i class="fa fa-times"></i>
+												</button>
+											</span> <span class="input-group-addon">
+												<button class="btn default date-set" type="button">
+													<i class="fa fa-calendar"></i>
+												</button>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class=" col-md-12">
+							<div class="mt-checkbox-list">
+								<label class="mt-checkbox mt-checkbox-outline"> <input
+									type="checkbox" name="emailHotelToInform"
+									ng-model="recordDto.confirmation.emailHotelToInform" />
+									Email Hotel To Inform Training Materials Are Sent <span></span></label>
+
+							</div>
+						</div>
+						<div class=" col-md-12">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label ">Confirmation Training
+										Material Are Received On :</label>
+									<div>
+										<div class="input-group date form_datetime bs-datetime"
+											data-date-format="yyyy-mm-dd hh:ii:ss">
+											<input class="form-control" size="16" type="text" value=""
+												readonly=""
+												ng-model="recordDto.confirmation.confirmationTrainingMaterialReceivedOn"
+												name="confirmTrMaterialAndRecvOn" /> <span
+												class="input-group-addon">
+												<button class="btn default date-reset" type="button">
+													<i class="fa fa-times"></i>
+												</button>
+											</span> <span class="input-group-addon">
+												<button class="btn default date-set" type="button">
+													<i class="fa fa-calendar"></i>
+												</button>
+											</span>
+										</div>
+									</div>
+									<span class="help-inline" style="color: red;"
+										ng-show="editForm.confirmTrMaterialAndRecvOn.$dirty && editForm.confirmTrMaterialAndRecvOn.$error.required">This
+										field is required.</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+			<div class="col-md-2">
+				<label class="control-label">Notes :</label>
+				<textarea rows="28" type="text" id="firstName"
+					class="form-control common-border" name="confirmationLocationNotes"
+					ng-model="recordDto.confirmation.confirmationLocationNotes"></textarea>
+			</div>
+		</div>
+	</div>
+</div>

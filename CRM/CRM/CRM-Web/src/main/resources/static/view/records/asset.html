@@ -1,0 +1,74 @@
+<script>
+	jQuery(document).ready(function() {
+		ComponentsDateTimePickers.init()
+	});
+</script>
+
+<div class="container-fluid">
+	<div class="form-body">
+		<div class="col-md-8">
+			<div class="row form-border">
+				<div class="col-md-5">
+					<div class="form-group">
+						<label class="control-label">Interested? :</label> <select
+							class="form-control" name = "interestedAsset"
+							ng-model="recordDto.confirmation.interestedAsset" name = "interestedAsset">
+							<option value="{{assetItem}}"
+							ng-repeat="assetItem in assetList"
+							ng-selected="assetItem == recordDto.confirmation.interestedAsset">{{assetItem}}</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-5 ">
+					<label class="control-label ">Callback Time :</label>
+					<div>
+						<div class="input-group date form_datetime bs-datetime"
+							data-date-format="yyyy-mm-dd hh:ii:ss">
+							<input class="form-control" size="16" type="text" value=""
+								readonly="" ng-model="recordDto.confirmation.callbackAsset"  name="assetcallbackTimne"/>
+							<span class="input-group-addon">
+								<button class="btn default date-reset" type="button">
+									<i class="fa fa-times"></i>
+								</button>
+							</span> <span class="input-group-addon">
+								<button class="btn default date-set" type="button">
+									<i class="fa fa-calendar"></i>
+								</button>
+							</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-10">
+					<label class="control-label">Notes :</label>
+					<textarea rows="6" type="text" id=""
+						class="form-control common-border" name = "assetNotes"
+						ng-model="recordDto.confirmation.assetNotes"></textarea>
+				</div>
+			</div>
+			<div class="row input-space">
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label class="control-label ">Demo Date & Time :</label>
+						<div>
+							<div class="input-group date form_datetime bs-datetime"
+								data-date-format="yyyy-mm-dd hh:ii:ss">
+								<input class="form-control" size="16" type="text" value=""
+									readonly ng-model="recordDto.booking.demoDate"   name="demodateAndTimne"/> <span
+									class="input-group-addon">
+									<button class="btn default date-reset" type="button">
+										<i class="fa fa-times"></i>
+									</button>
+								</span> <span class="input-group-addon">
+									<button class="btn default date-set" type="button">
+										<i class="fa fa-calendar"></i>
+									</button>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

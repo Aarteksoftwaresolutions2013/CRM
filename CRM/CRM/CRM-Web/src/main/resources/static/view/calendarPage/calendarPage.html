@@ -1,0 +1,150 @@
+<div
+	class="page-header-fixed page-sidebar-closed-hide-logo calendarCtrl">
+	<div class="wrapper">
+		<div class="container-fluid">
+			<div class="page-content">
+				<div class="row">
+					<div class="btn default btn-responsiveCalendar col-md-3 content">
+						<div
+							class="btn default btn-fontCalendar btn-responsiveCalendar col-md-6">
+							<label>Phase</label> <select class="form-control"
+								ng-model="calendarDTO.phase" ng-change="selectedItemChanged()">
+								<option selected="" value="Show All">Show All</option>
+								<option value="{{phase}}" ng-repeat="phase in phaseList">{{phase}}</option>
+							</select>
+						</div>
+
+						<div
+							class="btn default btn-fontCalendar btn-responsiveCalendar col-md-6">
+							<label>Filter</label> <select class="form-control"
+								ng-model="calendarDTO.consultant"
+								ng-change="getselectedConsultants()">
+								<option selected="" value="All">All</option>
+								<option value="{{consultant.consultants}}"
+									ng-repeat="consultant in listOfConsultants">{{consultant.consultants}}</option>
+							</select>
+						</div>
+
+					</div>
+					<div
+						class="col-md-9 btn default btn-fontCalendar btn-responsiveCalendar content">
+						<ul class="color">
+							<li ng-click="viewLocation()"
+								class="btn default btn-fontCalendar btn-responsiveCalendar ">Add
+								Location</li>
+							<li ng-click="viewDate()"
+								class="btn default btn-fontCalendar btn-responsiveCalendar ">Add
+								Date</li>
+							<li
+								class="btn default btn-fontCalendar btn-responsiveCalendar btn-No-Color-color">No
+								Color</li>
+							<li
+								class="btn default btn-fontCalendar btn-responsiveCalendar btn-Patricia-Holiday-color">Patricia
+								Holiday</li>
+							<li
+								class="btn default btn-fontCalendar btn-responsiveCalendar btn-Half-Term-color">Half
+								Term</li>
+							<li
+								class="btn default btn-fontCalendar btn-responsiveCalendar btn-Possible-Training-color">Possible
+								Training</li>
+							<li
+								class="btn default btn-fontCalendar btn-responsiveCalendar btn-Bank-Holidays-color">Bank
+								Holidays</li>
+							<li
+								class="btn default btn-fontCalendar btn-responsiveCalendar btn-Greeen-Holiday-color">Greeen
+								Holiday</li>
+						</ul>
+					</div>
+				</div>
+
+
+				<div class="page-content-col">
+					<!-- BEGIN PAGE BASE CONTENT -->
+					<div class="row">
+						<div class="col-md-12">
+							<div class="portlet light portlet-fit bordered calendar">
+								<div class="portlet-title">
+									<div class="caption">
+										<i class=" icon-layers font-green"></i> <span
+											class="caption-subject font-green sbold uppercase">Calendar</span>
+									</div>
+								</div>
+								<div class="portlet-body">
+									<div class="row">
+										<!-- <input type="button" ng-click="getAllLocationDate()"> -->
+										<!-- <div class="col-md-3 col-sm-12">
+											BEGIN DRAGGABLE EVENTS PORTLET
+											<h3 class="event-form-title margin-bottom-20">Draggable
+												Events</h3>
+											<div id="external-events">
+												<form class="inline-form">
+													<input type="text" value="" class="form-control"
+														placeholder="Event Title..." id="event_title" /> <br />
+													<a href="javascript:;" id="event_add" class="btn green">
+														Add Event </a>
+												</form>
+												<hr />
+												<div id="event_box" class="margin-bottom-10"></div>
+												<label
+													class="mt-checkbox mt-checkbox-single mt-checkbox-outline"
+													for="drop-remove"> remove after drop <input
+													type="checkbox" class="group-checkable" id="drop-remove" />
+													<span></span>
+												</label>
+												<hr class="visible-xs" />
+											</div>
+											END DRAGGABLE EVENTS PORTLET
+										</div> -->
+										<div class="col-md-12">
+											<div id="calendar" class="has-toolbar"></div>
+										</div>
+
+									</div>
+								</div>
+								
+								<div class="col-md-7 col-sm-7 calendar-padding" style="border: 3px solid #e5e5e5; margin-top: 7px;">
+									<div class="col-md-3 col-sm-3">
+										<label>B - Booking</label>
+
+									</div>
+									<div class="col-md-3 col-sm-3">
+										<label>E - Enquiry</label>
+									</div>
+									<div class="col-md-3 col-sm-3">
+										<label>P - Primary</label>
+									</div>
+									<div class="col-md-3 col-sm-3">
+										<label>J - Junior</label>
+									</div>
+									<div class="col-md-3 col-sm-3">
+										<label>I - Infant</label>
+									</div>
+									<div class="col-md-3 col-sm-3">
+										<label>S - Secondary</label>
+									</div>
+									<div class="col-md-3 col-sm-3">
+										<label>C - Conditional</label>
+									</div>
+
+									<div class="col-md-3 col-sm-3">
+										<label>W - Waiting List</label>
+									</div>
+									<div class="col-md-3 col-sm-3">
+										<label>U - Unknown</label>
+									</div>
+									<div class="col-md-3 col-sm-3">
+										<label>SP - Special</label>
+									</div>
+									<div class="col-md-3 col-sm-3">
+										<label>Com - Primary and Secondary</label>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,207 @@
+<html lang="en" ng-app="CRMApp">
+<head>
+<script type="text/javascript">
+    document.write("<base href=" + document.location.href + ">");
+</script>
+<meta charset="utf-8" http-equiv="refresh">
+<title>CRM</title>
+<!-- BEGIN GLOBAL MANDATORY STYLES -->
+<link
+	href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all"
+	rel="stylesheet" type="text/css" />
+<link href="assets/global/plugins/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css" />
+<link
+	href="assets/global/plugins/simple-line-icons/simple-line-icons.min.css"
+	rel="stylesheet" type="text/css" />
+<link href="assets/global/plugins/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet" type="text/css" />
+<link href="assets/global/css/components.min.css" rel="stylesheet"
+	id="style_components" type="text/css" />
+<link href="assets/global/css/plugins.min.css" rel="stylesheet"
+	type="text/css" />
+<link href="assets/global/plugins/fullcalendar/fullcalendar.min.css"
+	rel="stylesheet" type="text/css" />
+
+<link href="assets/pages/css/login-5.min.css" rel="stylesheet"
+	type="text/css" />
+<!-- <link href="assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css"
+	rel="stylesheet" type="text/css" /> -->
+<link
+	href="assets/global/plugins/bootstrap-table/bootstrap-table.min.css"
+	rel="stylesheet" type="text/css" />
+
+
+<!-- DashBoard -->
+
+<link href="assets/global/plugins/datatables/datatables.min.css"
+	rel="stylesheet" type="text/css" />
+<link href="assets/layouts/layout5/css/layout.min.css" rel="stylesheet"
+	type="text/css" />
+<link href="assets/layouts/layout5/css/custom.css" rel="stylesheet"
+	type="text/css" />
+<link href="assets/layouts/layout5/css/styles.css" rel="stylesheet"
+	type="text/css" />
+<!-- datepicker  -->
+<link
+	href="assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css"
+	rel="stylesheet" type="text/css" />
+<link
+	href="assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"
+	rel="stylesheet" type="text/css" />
+<link
+	href="assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css"
+	rel="stylesheet" type="text/css" />
+<link
+	href="assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
+	rel="stylesheet" type="text/css" />
+
+<!-- END PAGE LEVEL STYLES -->
+<!-- BEGIN THEME LAYOUT STYLES -->
+<!-- END THEME LAYOUT STYLES -->
+
+<link rel="shortcut icon" href="favicon.ico" />
+</head>
+<!-- END HEAD -->
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+              <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+              <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+            <![endif]-->
+
+
+<!--[if lt IE 9]>
+			<script src="../assets/global/plugins/respond.min.js"></script>
+			<script src="../assets/global/plugins/excanvas.min.js"></script> 
+<script src="../assets/global/plugins/ie8.fix.min.js"></script> 
+<![endif]-->
+<!-- BEGIN CORE PLUGINS -->
+<script src="assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="assets/global/plugins/jquery-ui/jquery-ui.min.js"
+	type="text/javascript"></script>
+
+<script src="assets/global/plugins/bootstrap/js/bootstrap.min.js"
+	type="text/javascript"></script>
+
+<script
+	src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"
+	type="text/javascript"></script>
+<script
+	src="assets/global/plugins/jquery-validation/js/additional-methods.min.js"
+	type="text/javascript"></script>
+<script
+	src="assets/global/plugins/backstretch/jquery.backstretch.min.js"
+	type="text/javascript"></script>
+<script src="assets/global/scripts/app.min.js" type="text/javascript"></script>
+<script src="assets/pages/scripts/login-5.min.js" type="text/javascript"></script>
+
+<!-- DashBoard -->
+<script src="assets/global/scripts/app.min.js" type="text/javascript"></script>
+<!-- <script src="assets/pages/scripts/dashboard.min.js"
+	type="text/javascript"></script> -->
+<script src="assets/layouts/layout5/scripts/layout.min.js"
+	type="text/javascript"></script>
+<script src="assets/global/scripts/datatable.js" type="text/javascript"></script>
+<script src="assets/global/plugins/datatables/datatables.min.js"
+	type="text/javascript"></script>
+<script
+	src="assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"
+	type="text/javascript"></script>
+
+<script src="assets/pages/scripts/table-datatables-managed.min.js"
+	type="text/javascript"></script>
+<!--datePicker  -->
+<script src="assets/global/plugins/moment.min.js" type="text/javascript"></script>
+
+<script
+	src="assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js"
+	type="text/javascript"></script>
+<script
+	src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"
+	type="text/javascript"></script>
+<script
+	src="assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"
+	type="text/javascript"></script>
+<script
+	src="assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"
+	type="text/javascript"></script>
+<script src="assets/pages/scripts/components-date-time-pickers.min.js"
+	type="text/javascript"></script>
+<script src="assets/pages/scripts/table-datatables-editable.min.js"
+	type="text/javascript"></script>
+<script src="assets/apps/scripts/calendar.min.js" type="text/javascript"></script>
+<script src="assets/global/plugins/fullcalendar/fullcalendar.min.js"
+	type="text/javascript"></script>
+<script src="assets/pages/scripts/form-validation.min.js"
+	type="text/javascript"></script>
+<script
+	src="assets/global/plugins/bootstrap-table/bootstrap-table.min.js"
+	type="text/javascript"></script>
+
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/lib/angular/angular.js" type="text/javascript"></script>
+<script src="js/lib/angular/angular-animate.js" type="text/javascript"></script>
+<script src="js/lib/angular/angular-route.js" type="text/javascript"></script>
+<script src="js/lib/angular/ngStorage.min.js" type="text/javascript"></script>
+<script src="js/lib/angular/angular-sanitize.js" type="text/javascript"></script>
+<script src="assets/global/plugins/dir/dirPagination.js"></script>
+<script
+	src="assets/global/plugins/bootstrap-modal/js/ui-bootstrap-tpls.min.js"
+	type="text/javascript"></script>
+<!--  <script
+	src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>  -->
+	
+<script
+	src="assets/pdf/pdfmake.min.js" type="text/javascript"></script>
+	<script
+	src="assets/pdf/vfs_fonts.js" type="text/javascript"></script>
+</head>
+<body ng-controller="homeCtrl">
+	<div>
+		<header-directive></header-directive>
+
+		<div ng-view=""></div>
+	</div>
+	<!-- <div id="loader"></div> -->
+
+	<script src="js/app/app.js" type="text/javascript"></script>
+	<script src="js/app/route.js" type="text/javascript"></script>
+	<script src="js/directive/required/requiredField.directive.js"
+		type="text/javascript"></script>
+	<script src="js/directive/header/headerDirective.directive.js"
+		type="text/javascript"></script>
+	<script src="js/directive/header/headerCtrl.js" type="text/javascript"></script>
+	<script src="view/home/homeCtrl.js" type="text/javascript"></script>
+	<script src="view/login/loginCtrl.js" type="text/javascript"></script>
+	<script src="view/login/loginService.js" type="text/javascript"></script>
+	<script src="view/dashboard/dashboardCtrl.js" type="text/javascript"></script>
+	<script src="view/dashboard/dashboardService.js" type="text/javascript"></script>
+	<script src="view/addSales/addSalesCtrl.js" type="text/javascript"></script>
+	<script src="view/addSales/addSalesService.js" type="text/javascript"></script>
+	<script src="view/addUser/addUserService.js" type="text/javascript"></script>
+	<script src="view/addUser/addUserCtrl.js" type="text/javascript"></script>
+	<script src="view/records/recordsCtrl.js" type="text/javascript"></script>
+	<script src="view/records/recordsService.js" type="text/javascript"></script>
+	<script src="view/reporting/reportingCtrl.js" type="text/javascript"></script>
+	<script src="view/reporting/reportingService.js" type="text/javascript"></script>
+	<script src="view/addLocation/addLocationCtrl.js"
+		type="text/javascript"></script>
+	<script src="view/addLocation/addLocationService.js"
+		type="text/javascript"></script>
+	<script src="view/addDate/addDateCtrl.js" type="text/javascript"></script>
+	<script src="view/addDate/addDateService.js" type="text/javascript"></script>
+	<script src="view/calendarPage/calendarPageCtrl.js"
+		type="text/javascript"></script>
+	<script src="view/calendarPage/calendarPageService.js"
+		type="text/javascript"></script>
+	<script src="view/records/modal/modalCtrl.js" type="text/javascript"></script>
+	<script src="view/records/modal/modalInstanceCtrl.js" type="text/javascript"></script>
+
+
+</body>
+</html>
